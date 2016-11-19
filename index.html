@@ -42,18 +42,22 @@
                             //<![CDATA[
                             var str=document.URL;
                             var a= str.search('\\?w');
-                              var b= str.search("\\?city=");
-                              var city = str.slice(b+6,str.length);
-                              var weather_code = str.slice(a+2,b);
-                                if (a==-1){
-                                       document.getElementById("weather_in").innerHTML= "Make Weather Great Again";
-                                }    else{
-                                      document.getElementById("weather_in").innerHTML = city;      
-                                }     
+                            var b= str.search("\\?city=");
+                              
+              if (a==-1 || b==-1){
+                  document.getElementById("weather_in").innerHTML= "Make Weather Great Again";
+      				$("#p0").removeClass('hidden');
+              }else{
+                 var city = str.slice(b+6,str.length);
+                 var weather_code = str.slice(a+2,b);
+                
+                document.getElementById("weather_in").innerHTML = city;
+                var str1="#p";  
+                var str_id=str1.concat(weather_code);
+                $(str_id).removeClass('hidden');
+              }
+             
                             //]]>
-            var str1="#p";  
-            var str_id=str1.concat(weather_code);
-          $(str_id).removeClass('hidden');
             </script>
           </div>
           <div class="col-md-6">
@@ -94,7 +98,7 @@
                     </p>Make weather:
                     <div class="radio">
                       <label>
-                        <input type="radio" name="wheather" value="1">sunny</label>
+                        <input type="radio" name="wheather" value="1" checked="checked">sunny</label>
                     </div>
                     <div class="radio">
                       <label>
@@ -164,7 +168,7 @@
                   <br>We make weather great again.
                   <br>We believe it shouldn't be difficult to change the weather.
                   <br>With our solution
-                  <b>even you </b>can change the weather with just a few clicks.
+                  <b>even you</b>can change the weather with just a few clicks.
                   <br>We fight global warming!</p>
                 <p>
                   <b>Address:</b>
