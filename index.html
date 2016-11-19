@@ -12,26 +12,48 @@
           <div class="col-md-6">
             <div class="jumbotron">
               <p id="weather_in">München City</p>
-              <p>Today (Nov 13)</p>
-              <img src="1479205903.png" class="img-responsive">
-              <p>12°C rain feels like 2°C</p>
+              <p id="date">Today, Nov 13</p>
+              <div id="p0" class="hidden">
+                <img src="weather/01.png" class="img-responsive">Make your own weather.</div>
+              <div id="p1" class="hidden">
+                <img src="weather/01.png" class="img-responsive">32°C, sun, feels like 34°C</div>
+              <div id="p2" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p3" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p4" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p5" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p6" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p7" class="hidden">
+                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
+              <div id="p8" class="hidden">
+                <img src="weather/42.png" class="img-responsive">12°C, rain, end of world, feels like shit</div>
             </div>
             <script type="text/javascript">
-              //<![CDATA[
-              
-              var str=document.URL;
-               
-              var a= str.search('\\?w');
-                var b= str.search("\\?city=");
-                var city = str.slice(b+6,str.length);
-                var weather_code = str.slice(a+2,b);
-              
-                  if (a==-1){
-                         document.getElementById("weather_in").innerHTML= "Make Weather Great Again";
-                  }    else{
-                        document.getElementById("weather_in").innerHTML = city;      
-                  }     
-              //]]>
+              var d = (new Date()).toString().split(' ').splice(1,2).join(' ');
+              document.getElementById("date").innerHTML ="Today, " + d;
+                  
+                  
+                            
+                            
+                            //<![CDATA[
+                            var str=document.URL;
+                            var a= str.search('\\?w');
+                              var b= str.search("\\?city=");
+                              var city = str.slice(b+6,str.length);
+                              var weather_code = str.slice(a+2,b);
+                                if (a==-1){
+                                       document.getElementById("weather_in").innerHTML= "Make Weather Great Again";
+                                }    else{
+                                      document.getElementById("weather_in").innerHTML = city;      
+                                }     
+                            //]]>
+            var str1="#p";  
+            var str_id=str1.concat(weather_code);
+          $(str_id).removeClass('hidden');
             </script>
           </div>
           <div class="col-md-6">
@@ -48,7 +70,7 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div id="share" class="tab-pane fade in active">
+              <div id="share" class="tab-pane fade ">
                 <p>
                   <br>
                   <a><i class="fa fa-4x fa-fw fa-share-alt-square"></i></a>
@@ -57,19 +79,31 @@
                   <a><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
                 </p>
               </div>
-              <div id="make" class="tab-pane fade">
-                <form class="form-inline" id="Form">
+              <div id="make" class="tab-pane fade in active">
+                <p>
+                  <br>Want to go for BBQ, skiing, swimming?
+                  <br>Motivate your friends with great weather!
+                  <br>Don't like meeting your friends?
+                  <br>Excuse yourself with bad weather!&nbsp;
+                  <br>
+                  <br>It's never been so easy to make weather great again!</p>
+                <form class="form" id="Form">
                   <div class="form-group">
-                    <br>Where:
-                    <input class="form-control" id="Where" type="text">
-                  </div>
-                  <p>Make weather:</p>
-                  <div class="form-group">
-                    <input type="radio" name="wheather" value="1" checked="checked">sunny
-                    <br>
-                    <input type="radio" name="wheather" value="2">rainy
-                    <br>
-                    <input type="radio" name="wheather" value="8">burn more coal1!
+                    <p>Where:
+                      <input class="form-control" id="Where" type="text" value="Munich">
+                    </p>Make weather:
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="wheather" value="1">sunny</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="wheather" value="1">rainy</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" value="8" name="wheather">burn more coal!1</label>
+                    </div>
                     <!-- <input type="radio" name="wheather" value="3">for skiing
                   <br>
                   <input type="radio" name="wheather" value="4">for surfing
@@ -82,7 +116,8 @@
                   <br>
                   <input type="radio" name="wheather" value="8">burn more coal1!
 <br> -->
-                    <div id="linktext" style="font-size:12px">small link text</div>
+                    <a class="btn btn-primary" id="link" href="" target="_blank" name="link">Create your own weather!</a>
+                    <div id="linktext" style="font-size:12px">debug link text</div>
                   </div>
                   <script type="text/javascript">
                     //<![CDATA[
@@ -99,10 +134,12 @@
                         
                         var weatherno=1;
                         var mystr="http://makeweathergreatagain.com/?w" +value + "?city=" + document.getElementById("Where").value;
-                        document.getElementById("linktext").innerHTML="debug: " + mystr;
                         
-                        var yourElement = document.getElementById('linktext');
-                         yourElement.setAttribute('href', mystr);
+                      document.getElementById("linktext").innerHTML="debug: " + mystr;
+                        
+                       
+                         var temp=document.getElementById('link');
+                      temp.setAttribute('href', mystr);
                         
                     }
                         
