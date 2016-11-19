@@ -74,16 +74,28 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div id="share" class="tab-pane fade ">
+              <div id="share" class="tab-pane fade  in active">
                 <p>
                   <br>
                   <a><i class="fa fa-4x fa-fw fa-share-alt-square"></i></a>
                   <a><i class="fa fa-4x fa-fw fa-facebook-square"></i></a>
                   <a><i class="fa fa-4x fa-fw fa-envelope-square"></i></a>
-                  <a><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
+                  <a id="whatsapp" href="none"><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
+                  
+
+<script type="text/javascript">
+//<![CDATA[
+var text="whatsapp://send?text=" + document.URL;
+    //var text="mailto:?subject=Weather&amp;body=http%3A%2F%2Fmgwa.jimdo.com%2Fweather%2F";
+    //var x = document.getElementsByClassName("cc-sharebuttons-mail");
+    //x[0].href=text;
+    document.getElementById("whatsapp").href=text;
+//]]>
+</script>
+                
                 </p>
               </div>
-              <div id="make" class="tab-pane fade in active">
+              <div id="make" class="tab-pane fade">
                 <p>
                   <br>Want to go for BBQ, skiing, swimming?
                   <br>Motivate your friends with great weather!
@@ -168,12 +180,12 @@
                   <br>We make weather great again.
                   <br>We believe it shouldn't be difficult to change the weather.
                   <br>With our solution
-                  <b>even you</b>can change the weather with just a few clicks.
+                  <b>even you</b>&nbsp;can change the weather with just a few clicks.
                   <br>We fight global warming!</p>
                 <p>
                   <b>Address:</b>
-                  <br>1600 Pennsylvania Ave NW Washington
-                  <br>DC 20500, USA
+                  <br>1600 Pennsylvania Ave NW
+                  <br>Washington DC 20500, USA
                   <br>Phone: +1 202-456-111</p>
               </div>
             </div>
