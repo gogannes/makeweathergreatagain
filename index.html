@@ -18,117 +18,79 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div id="content">
-              <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                <li class="active">
-                  <a href="#share" data-toggle="tab">Share</a>
-                </li>
-                <li>
-                  <a href="#orange" data-toggle="tab">Make</a>
-                </li>
-                <li>
-                  <a href="#yellow" data-toggle="tab">About</a>
-                </li>
-              </ul>
-              <div id="my-tab-content" class="tab-content">
-           
+           <br> <ul class="nav nav-tabs">
+              <li class="active">
+                <a data-toggle="pill" href="#share">Share</a>
+              </li>
+              <li>
+                <a data-toggle="pill" href="#make">Make Weather Great Again</a>
+              </li>
+              <li>
+                <a data-toggle="pill" href="#about">About</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="share" class="tab-pane fade in active">
+                <p>
+                  <br>
                   <a><i class="fa fa-5x fa-fw fa-share-alt-square"></i></a>
                   <a><i class="fa fa-5x fa-fw fa-facebook-square"></i></a>
-
                   <a><i class="fa fa-5x fa-fw fa-envelope-square"></i></a>
                   <a><i class="fa fa-5x fa-fw fa-whatsapp"></i></a>
-              
-                <div class="tab-pane" id="orange">
-                  <h1>Orange</h1>
-                  <p>orange orange orange orange orange</p>
-                </div>
-                <div class="tab-pane" id="yellow">
-                  <h1>Yellow</h1>
-                  <p>yellow yellow yellow yellow yellow</p>
-                </div>
+                </p>
+              </div>
+              <div id="make" class="tab-pane fade">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <br>Where:
+                    <input class="form-control" id="Where" type="text">
+                  </div>
+                  <p>Make weather:</p>
+                  <div class="form-group">
+                    <input type="radio" name="wheather" value="1" checked="checked">sunny
+                    <br>
+                    <input type="radio" name="wheather" value="2">rainy
+                    <br>
+                    <input type="radio" name="wheather" value="8">burn more coal1!
+                    <!-- <input type="radio" name="wheather" value="3">for skiing
+                  <br>
+                  <input type="radio" name="wheather" value="4">for surfing
+                  <br>
+                  <input type="radio" name="wheather" value="5">for staying at home
+                  <br>
+                  <input type="radio" name="wheather" value="6">for hiking
+                  <br>
+                  <input type="radio" name="wheather" value="7">climate change
+                  <br>
+                  <input type="radio" name="wheather" value="8">burn more coal1!
+<br> -->
+                    <div id="linktext" style="font-size:12px">small link text</div>
+                  </div>
+                </form>
+              </div>
+              <div id="about" class="tab-pane fade">
+                <p>
+                  <br>We make weather great again.
+                  <br>We believe it shouldn't be difficult to change the weather.
+                  <br>With our solution
+                  <b>even you</b>can change the weather with just a few clicks.
+                  <br>We fight global warming!</p>
+                <p>
+                  <b>Address:</b>
+                  <br>1600 Pennsylvania Ave NW Washington
+                  <br>DC 20500, USA
+                  <br>Phone: +1 202-456-111</p>
               </div>
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+          jQuery(document).ready(function ($) {
+              $('#tabs').tab();
+          });
+        </script>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <p>Share:
-              <br>-
-              <a id="link" href="" target="_blank" name="link">Link</a>
-              <br>-Whatsapp
-              <br>-Facebook
-              <br>-Twitter
-              <br>-Email</p>
-            <p>MAKE
-              <br>Where:</p>
-            <form action="#" method="post" class="demoForm" id="demoForm" name="demoForm">
-              <input id="place" type="text" name="Place" value="Munich">
-              <br>
-              <br>How do you want the weather to be?
-              <br>
-              <input type="radio" name="wheather" value="1" checked="checked">sunny
-              <br>
-              <input type="radio" name="wheather" value="2">rainy
-              <br>
-              <input type="radio" name="wheather" value="3">for skiing
-              <br>
-              <input type="radio" name="wheather" value="4">for surfing
-              <br>
-              <input type="radio" name="wheather" value="5">for staying at home
-              <br>
-              <input type="radio" name="wheather" value="6">for hiking
-              <br>
-              <input type="radio" name="wheather" value="7">climate change
-              <br>
-              <input type="radio" name="wheather" value="8">burn more coal1!
-              <br>
-            </form>
-            <br>
-            <div id="linktext" style="font-size:5px"></div>
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-3"></div>
-          <div class="col-md-3"></div>
-          <div class="col-md-3"></div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-xs-3 text-center">
-            <a><i class="fa fa-5x fa-fw fa-instagram"></i></a>
-          </div>
-          <div class="col-xs-3">
-            <a><i class="fa fa-5x fa-fw fa-facebook"></i></a>
-          </div>
-          <div class="col-xs-3 text-center">
-            <a><i class="fa fa-5x fa-fw fa-github"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row"></div>
-      </div>
-    </div>
-    <script type="text/javascript">
-      jQuery(document).ready(function ($) {
-          $('#tabs').tab();
-      });
-    </script>
   
 
 </body></html>
