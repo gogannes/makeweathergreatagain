@@ -3,11 +3,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //////////////////////////////////////////////////
+        // function to be executed each time form is changed
+        function share() {
+            //read inputs
+            var text_where = document.getElementById("Where").value;
+            var radios = document.getElementsByTagName('input');
+            var checked_button;
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].type === 'radio' && radios[i].checked) {
+                    // get value, set checked flag or do whatever you need to
+                    checked_button = radios[i].value;
+                }
+            }
+
+            //creat link text
+            var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
+
+            //set link text for debug
+            document.getElementById("linktext").innerHTML = "debug: " + text_link;
+
+            //set hyperlink
+            var temp = document.getElementById('link');
+            temp.setAttribute('href', text_link);
+
+            //to do set url in browser (this is tricky as it usually leads to a reload. that makes sense, because else one could make people believe to be at a certain website...) 
+
+        }
+    </script>
     <script>
-      if (0)
-        
-      {
-      (function(i, s, o, g, r, a, m) {
+        (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -21,140 +47,248 @@
 
         ga('create', 'UA-87680784-1', 'auto');
         ga('send', 'pageview');
-      }
     </script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
-  </head><body>
+</head><body>
     <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7">
-            <div class="jumbotron">
-              <p id="weather_in" style="font-size:25px">München City</p>
-              <!--<p id="date">Today, Nov 13</p>-->
-              <div id="p0" class="hidden">
-                <img src="weather/01.png" class="img-responsive">Make your own weather.</div>
-              <div id="p1" class="row">
-                <div class="col-xs-7">
-                  <div>
-                    <img src="weather/01.png" class="img-responsive">
-                  </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <!-- ELEMENT 0 -->
+                    <div class="jumbotron hidden" id="p_0">
+                        <p id="weather_in_0" style="font-size:25px">Make Weather Great Again!</p>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div>
+                                    <img src="weather/01.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div>
+                                    <p id="date_0" style="font-size:14px">Today, Nov 13</p>
+                                    <p style="font-size:14px">
+                                        <span style="font-size:50px">32</span>°C
+                                        <br>you can change the weather through "Make Weather Great Again"-Tab</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ELEMENT 0 END -->
+                    <!-- ELEMENT 1 -->
+                    <div class="jumbotron hidden" id="p_1">
+                        <p id="weather_in_1" style="font-size:25px">Element 1</p>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div>
+                                    <img src="weather/01.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div>
+                                    <p id="date_1" style="font-size:14px">Today, Nov 13</p>
+                                    <p style="font-size:14px">
+                                        <span style="font-size:50px">32</span>°C
+                                        <br>sun, feels like 34°C, enjoy it</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p>Tomorrow</p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>Trend</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/01.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">31°C
+                                        <br>sun</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/02.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">no significant changes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ELEMENT 1 END -->
+                    <!-- ELEMENT 2 -->
+                    <div class="jumbotron hidden" id="p_2">
+                        <p id="weather_in_2" style="font-size:25px">Element 2</p>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div>
+                                    <img src="weather/18.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div>
+                                    <p id="date_2" style="font-size:14px">Today, Nov 13</p>
+                                    <p style="font-size:14px">
+                                        <span style="font-size:50px">2</span>°C
+                                        <br>rain, feels like -5°C, stay home</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p>Tomorrow</p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>Trend</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/18.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">1°C
+                                        <br>rain</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/18.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">no significant changes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ELEMENT 2 END -->
+                    <!-- ELEMENT 3 -->
+                    <div class="jumbotron hidden" id="p_3">
+                        <p id="weather_in_3" style="font-size:25px">Element 3</p>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div>
+                                    <img src="weather/42.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div>
+                                    <p id="date_3" style="font-size:14px">Today, Nov 13</p>
+                                    <p style="font-size:14px">
+                                        <span style="font-size:50px">-87</span>°C
+                                        <br>heavy rain, hail, no sun, feels like shit, better leave our solar system</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p>Tomorrow</p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>Trend</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/42.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">it's not gonna be better</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <img src="weather/41.png" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p style="font-size:14px">there is no trend</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ELEMENT 3 END -->
                 </div>
-                <div class="col-xs-5">
-                  <div>
-                    <p id="date" style="font-size:14px">Today, Nov 13</p>
-                    <p style="font-size:14px">
-                      <span style="font-size:50px">32</span>°C
-                      <br>sun, feels like 34°C, enjoy it</p>
-                  </div>
-                </div>
-              </div><hr>
-              <div class="row" id="p1">
-                <div class="col-xs-6">
-                  <p>Tomorrow</p>
-                </div>
-                <div class="col-xs-6">
-                  <p>Trend</p>
-                </div>
-              </div>
-              <div class="row" id="p1">
-                <div class="col-xs-3">
-                  <div>
-                    <img src="weather/01.png" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-xs-3">
-                  <div>
-                    <p style="font-size:14px">31°C
-                      <br>sun</p>
-                  </div>
-                </div>
-                <div class="col-xs-3">
-                  <div>
-                    <img src="weather/02.png" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-xs-3">
-                  <div>
-                    <p style="font-size:14px">no significant changes</p>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden" id="p2">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div class="hidden" id="p3">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div id="p4" class="hidden">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div id="p5" class="hidden">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div id="p6" class="hidden">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div id="p7" class="hidden">
-                <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
-              <div id="p8" class="hidden">
-                <img src="weather/42.png" class="img-responsive">12°C, rain, end of world, feels like shit</div>
-            </div>
-          </div>
-          <div class="col-md-5">
-            <br>
-            <ul class="nav nav-tabs" style="font-size:13px">
-              <li class="active" id="li1">
-                <a data-toggle="pill" href="#share">Share</a>
-              </li>
-              <li id="li2">
-                <a data-toggle="pill" href="#make">Make Weather Great Again</a>
-              </li>
-              <li id="li3">
-                <a data-toggle="pill" href="#about">About</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div id="share" class="tab-pane fade in active">
-                <p>
-                  <br>
-                  <a><i class="fa fa-4x fa-fw fa-share-alt-square"></i></a>
-                  <a><i class="fa fa-4x fa-fw fa-facebook-square"></i></a>
-                  <a><i class="fa fa-4x fa-fw fa-envelope-square"></i></a>
-                  <a id="whatsapp" href="none"><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
-                  <script type="text/javascript">
-                    //<![CDATA[
+                <div class="col-md-5">
+                    <br>
+                    <ul class="nav nav-tabs" style="font-size:13px">
+                        <li class="active" id="li1">
+                            <a data-toggle="pill" href="#share">Share</a>
+                        </li>
+                        <li id="li2">
+                            <a data-toggle="pill" href="#make">Make Weather Great Again</a>
+                        </li>
+                        <li id="li3">
+                            <a data-toggle="pill" href="#about">About</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in " id="share">
+                            <p>
+                                <br>
+                                <a><i class="fa fa-4x fa-fw fa-share-alt-square"></i></a>
+                                <a><i class="fa fa-4x fa-fw fa-facebook-square"></i></a>
+                                <a><i class="fa fa-4x fa-fw fa-envelope-square"></i></a>
+                                <a id="whatsapp" href="none"><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
+                                <script type="text/javascript">
+                                    //<![CDATA[
                                     var text = "whatsapp://send?text=" + document.URL;
                                     //var text="mailto:?subject=Weather&amp;body=http%3A%2F%2Fmgwa.jimdo.com%2Fweather%2F";
                                     //var x = document.getElementsByClassName("cc-sharebuttons-mail");
                                     //x[0].href=text;
                                     document.getElementById("whatsapp").href = text;
                                     //]]>
-                  </script>
-                </p>
-              </div>
-              <div id="make" class="tab-pane fade in ">
-                <p>
-                  <br>Want to go for BBQ, skiing, swimming?
-                  <br>Motivate your friends with great weather!
-                  <br>Don't like meeting your friends?
-                  <br>Excuse yourself with bad weather!&nbsp;
-                  <br>
-                  <br>It's never been so easy to make weather great again!</p>
-                <form class="form" id="Form">
-                  <div class="form-group">
-                    <p>Where:
-                      <input class="form-control" id="Where" type="text" value="Munich">
-                    </p>Make weather:
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="wheather" value="1" checked="checked">sunny</label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="wheather" value="2">rainy</label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" value="8" name="wheather">burn more coal!1</label>
-                    </div>
-                    <!-- <input type="radio" name="wheather" value="3">for skiing
+                                </script>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade in active" id="make">
+                            <p>
+                                <br>Want to go for BBQ, skiing, swimming?
+                                <br>Motivate your friends with great weather!
+                                <br>Don't like meeting your friends?
+                                <br>Excuse yourself with bad weather!&nbsp;
+                                <br>
+                                <br>It's never been so easy to make weather great again!</p>
+                            <form class="form" id="Form">
+                                <div class="form-group">
+                                    <p>Where:
+                                        <input class="form-control" id="Where" type="text" value="Munich">
+                                    </p>Make weather:
+                                    <div class="radio">
+                                        <label>
+                        <input type="radio" name="wheather" value="1" checked="checked">great again</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                        <input type="radio" name="wheather" value="2">shitty</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                        <input type="radio" value="3" name="wheather">burn more coal!1</label>
+                                    </div>
+                                    <!-- <input type="radio" name="wheather" value="3">for skiing
 
                   <br>
 
@@ -177,80 +311,53 @@
                   <input type="radio" name="wheather" value="8">burn more coal1!
 
 <br> -->
-                    <a class="btn btn-primary" id="link" href="" target="_blank" name="link">Create your own weather!</a>
-                    <div id="linktext" style="font-size:12px">debug link text</div>
-                  </div>
-                  <script type="text/javascript">
-                    //<![CDATA[
-
-                                    function share() {
-                                        //read inputs
-                                        var text_where=document.getElementById("Where").value;
-                                        var radios = document.getElementsByTagName('input');
-                                        var checked_button;
-                                        for (var i = 0; i < radios.length; i++) {
-                                            if (radios[i].type === 'radio' && radios[i].checked) {
-                                                // get value, set checked flag or do whatever you need to
-                                                checked_button = radios[i].value;
-                                            }
-                                        }
-                                        
-                                        //creat link text
-                                        var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
-										
-                                       //set link text for debug
-                                        document.getElementById("linktext").innerHTML = "debug: " + text_link;
-			
-										//set hyperlink
-                                        var temp = document.getElementById('link');
-                                        temp.setAttribute('href', text_link);
-                                      
-                                        //to do set url in browser (this is tricky as it usually leads to a reload. that makes sense, because else one could make people believe to be at a certain website...) 
-
-                                    }
-
-                                    var sz = document.forms['Form'].elements['wheather'];
-
-                                    for (var i = 0; i < sz.length; i++) {
-
-                                        sz[i].onchange = share;
-                                    }
-
-                                    share();
-                                    document.getElementById("Where").oninput = share;
-
-
-                                    //]]>
-                  </script>
-                </form>
-              </div>
-              <div id="about" class="tab-pane fade in">
-                <p>
-                  <br>We make weather great again.
-                  <br>We believe it shouldn't be difficult to change the weather.
-                  <br>With our solution
-                  <b>even you</b>&nbsp;can change the weather with just a few clicks.
-                  <br>We fight global warming!</p>
-                <p>
-                  <b>Address:</b>
-                  <br>1600 Pennsylvania Ave NW
-                  <br>Washington DC 20500, USA
-                  <br>Phone: +1 202-456-111</p>
-              </div>
+                                    <a class="btn btn-primary" id="link" href="" target="_blank" name="link">Create your own weather!</a>
+                                    <div id="linktext" style="font-size:12px">debug link text</div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="about" class="tab-pane fade in">
+                            <p>
+                                <br>We make weather great again.
+                                <br>We believe it shouldn't be difficult to change the weather.
+                                <br>With our solution
+                                <b>even you</b>&nbsp;can change the weather with just a few clicks.
+                                <br>We fight global warming!</p>
+                            <p>
+                                <b>Address:</b>
+                                <br>1600 Pennsylvania Ave NW
+                                <br>Washington DC 20500, USA
+                                <br>Phone: +1 202-456-111</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <script type="text/javascript">
-          var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
-                document.getElementById("date").innerHTML = "Today, " + d;
+            <script type="text/javascript">
+                //////////////////////////////////////////////////
+                // code to be executed after page is loaded
+
+                // link changes in radio buttions with "share()"          
+                var sz = document.forms['Form'].elements['wheather'];
+                for (var i = 0; i < sz.length; i++) {
+                    sz[i].onchange = share;
+                }
+                // link changes in "where" form with "share()"          
+                document.getElementById("Where").oninput = share;
+
+
+
+                var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
                 var str = document.URL;
                 var a = str.search('\\?w');
                 var b = str.search("\\?city=");
 
-                if (a == -1 || b == -1) {
+                if (a == -1 || b == -1) { //url without correct parameters
+                    document.getElementById("weather_in_0").innerHTML = "Make Weather Great Again";
+                    //set date
+                    document.getElementById("date_0").innerHTML = "Today, " + d;
+                    //show jumbotron
+                    $("#p_0").removeClass('hidden');
 
-                    document.getElementById("weather_in").innerHTML = "Make Weather Great Again";
-                    $("#p0").removeClass('hidden');
                     //show directly tab "make weather great again"
                     document.getElementById("li1").classList.remove("active");
                     document.getElementById("li2").classList.add("active");
@@ -260,32 +367,48 @@
                     document.getElementById("make").classList.add("active");
                     document.getElementById("about").classList.remove("active");
 
-                } else {
+                } else { //url with correct parameters
                     var city = str.slice(b + 6, str.length);
                     var weather_code = str.slice(a + 2, b);
 
-                    document.getElementById("weather_in").innerHTML = city;
-                    var str1 = "#p";
-
-                    var str_id = str1.concat(weather_code);
+                    var str_id = "#p_" + weather_code;
                     $(str_id).removeClass('hidden');
 
-                    //set values in input form from url
+                    var str_weather_id = "weather_in_" + weather_code;
+                    document.getElementById(str_weather_id).innerHTML = city;
+
+                    //set date
+                    var str_date_id = "date_" + weather_code;
+                    document.getElementById(str_date_id).innerHTML = "Today, " + d;
+
+
+                    //set values in input form form from url
                     document.getElementById("Where").value = city;
                     for (var i = 0; i < sz.length; i++) {
                         if (sz[i].value === weather_code) {
                             sz[i].checked = true;
                         }
                     }
+
+                    //show directly tab "share"
+                    document.getElementById("li1").classList.add("active");
+                    document.getElementById("li2").classList.remove("active");
+                    document.getElementById("li2").classList.remove("active");
+
+                    document.getElementById("share").classList.add("active");
+                    document.getElementById("make").classList.remove("active");
+                    document.getElementById("about").classList.remove("active");
+
+
                 }
 
 
 
-
-                //]]>
-        </script>
-      </div>
+                //execute share() once
+                share();
+            </script>
+        </div>
     </div>
-  
+
 
 </body></html>
