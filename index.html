@@ -196,7 +196,8 @@
                                         }
                                         
                                         //creat link text
-                                        var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
+					var location = window.location;    
+                                        var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
 										
                                        //set link text for debug
                                         document.getElementById("linktext").innerHTML = "debug: " + text_link;
@@ -254,11 +255,9 @@
                     //show directly tab "make weather great again"
                     document.getElementById("li1").classList.remove("active");
                     document.getElementById("li2").classList.add("active");
-                    document.getElementById("li2").classList.remove("active");
 
                     document.getElementById("share").classList.remove("active");
                     document.getElementById("make").classList.add("active");
-                    document.getElementById("about").classList.remove("active");
 
                 } else {
                     var city = str.slice(b + 6, str.length);
