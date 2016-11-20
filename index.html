@@ -4,9 +4,11 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+      // global variable
+      var old_weather_code="NA";
       //////////////////////////////////////////////////
         // function to be executed each time form is changed
-        function share() {
+        function update_all() {
             //read inputs
             var text_where = document.getElementById("Where").value;
             var radios = document.getElementsByTagName('input');
@@ -18,7 +20,7 @@
                 }
             }
 
-            //creat link text
+            //create link text
             //var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
 			var location = window.location;    
             var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
@@ -30,6 +32,33 @@
             var temp = document.getElementById('link');
             temp.setAttribute('href', text_link);
 
+            //update weather page instantaniously
+            var city = text_where;
+            var weather_code = checked_button;
+
+          // remove weather jumbotron 0 in case it was actve 
+          $("#p_0").addClass('hidden');
+
+          
+           if (old_weather_code===weather_code){
+          }else{// only if weather code has changed = radio button has been changed
+            var str_id = "#p_" + old_weather_code;                    
+            $(str_id).addClass('hidden');
+
+            var str_id = "#p_" + weather_code;          
+            $(str_id).removeClass('hidden');
+            
+            old_weather_code=weather_code;
+          }
+
+            var str_weather_id = "weather_in_" + weather_code;
+            document.getElementById(str_weather_id).innerHTML = city;
+
+            //set date
+            var str_date_id = "date_" + weather_code;
+            document.getElementById(str_date_id).innerHTML = "Today, " + d;
+
+          
             //to do set url in browser (this is tricky as it usually leads to a reload. that makes sense, because else one could make people believe to be at a certain website...) 
 
         }
@@ -290,30 +319,7 @@
                       <label>
                         <input type="radio" value="3" name="wheather">burn more coal!1</label>
                     </div>
-                    <!-- <input type="radio" name="wheather" value="3">for skiing
-
-                  <br>
-
-                  <input type="radio" name="wheather" value="4">for surfing
-
-                  <br>
-
-                  <input type="radio" name="wheather" value="5">for staying at home
-
-                  <br>
-
-                  <input type="radio" name="wheather" value="6">for hiking
-
-                  <br>
-
-                  <input type="radio" name="wheather" value="7">climate change
-
-                  <br>
-
-                  <input type="radio" name="wheather" value="8">burn more coal1!
-
-<br> -->
-                    <a class="btn btn-primary" id="link" href="" target="_blank" name="link">Create your own weather!</a>
+                    <a class="btn btn-primary" id="link" href="http://makeweathergreatagain.com/?w1?city=Munich" target="_blank" name="link">Create your own weather!</a>
                     <div id="linktext" style="font-size:12px">debug link text</div>
                   </div>
                 </form>
@@ -338,13 +344,13 @@
           //////////////////////////////////////////////////
                 // code to be executed after page is loaded
 
-                // link changes in radio buttions with "share()"          
+                // link changes in radio buttions with "update_all()"          
                 var sz = document.forms['Form'].elements['wheather'];
                 for (var i = 0; i < sz.length; i++) {
-                    sz[i].onchange = share;
+                    sz[i].onchange = update_all;
                 }
-                // link changes in "where" form with "share()"          
-                document.getElementById("Where").oninput = share;
+                // link changes in "where" form with "update_all()"          
+                document.getElementById("Where").oninput = update_all;
 
 
 
@@ -369,6 +375,21 @@
                     document.getElementById("make").classList.add("active");
                     document.getElementById("about").classList.remove("active");
 
+                  //create link text
+                  //var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
+                //  var location = window.location;    
+                 // var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
+
+                  //set link text for debug
+                  //document.getElementById("linktext").innerHTML = "debug: " + text_link;
+
+                  //set hyperlink
+                  //var temp = document.getElementById('link');
+                  //temp.setAttribute('href', text_link);
+
+                  
+                  
+
                 } else { //url with correct parameters
                     var city = str.slice(b + 6, str.length);
                     var weather_code = str.slice(a + 2, b);
@@ -392,6 +413,10 @@
                         }
                     }
 
+
+                    //execute update_all() once
+                    update_all();
+                  
                     //show directly tab "share"
                     document.getElementById("li1").classList.add("active");
                     document.getElementById("li2").classList.remove("active");
@@ -403,11 +428,6 @@
 
 
                 }
-
-
-
-                //execute share() once
-                share();
         </script>
       </div>
     </div>
