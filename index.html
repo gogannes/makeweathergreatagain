@@ -24,7 +24,7 @@
               <p id="date">Today, Nov 13</p>
               <div id="p0" class="hidden">
                 <img src="weather/01.png" class="img-responsive">Make your own weather.</div>
-              <div id="p1" class="hidden">
+              <div id="p1">
                 <img src="weather/01.png" class="img-responsive">32°C, sun, feels like 34°C</div>
               <div id="p2" class="hidden">
                 <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
@@ -45,13 +45,13 @@
           <div class="col-md-6">
             <br>
             <ul class="nav nav-tabs" style="font-size:13px">
-              <li class="active">
+              <li class="active" id="li1">
                 <a data-toggle="pill" href="#share">Share</a>
               </li>
-              <li>
+              <li id="li2">
                 <a data-toggle="pill" href="#make">Make Weather Great Again</a>
               </li>
-              <li>
+              <li id="li3">
                 <a data-toggle="pill" href="#about">About</a>
               </li>
             </ul>
@@ -74,7 +74,7 @@
                   </script>
                 </p>
               </div>
-              <div id="make" class="tab-pane fade">
+              <div id="make" class="tab-pane fade in ">
                 <p>
                   <br>Want to go for BBQ, skiing, swimming?
                   <br>Motivate your friends with great weather!
@@ -164,7 +164,7 @@
                   </script>
                 </form>
               </div>
-              <div id="about" class="tab-pane fade">
+              <div id="about" class="tab-pane fade in">
                 <p>
                   <br>We make weather great again.
                   <br>We believe it shouldn't be difficult to change the weather.
@@ -192,9 +192,19 @@
                                             var a= str.search('\\?w');
                                             var b= str.search("\\?city=");
                                               
-                              if (a==-1 || b==-1){//to do show directly tab "make weather great again"
+                              if (a==-1 || b==-1){
+                                
                                   document.getElementById("weather_in").innerHTML= "Make Weather Great Again";
                       				$("#p0").removeClass('hidden');
+                              //show directly tab "make weather great again"
+                                document.getElementById("li1").classList.remove("active");
+                                document.getElementById("li2").classList.add("active");
+                               document.getElementById("li2").classList.remove("active");
+                               
+                                document.getElementById("share").classList.remove("active");
+                                document.getElementById("make").classList.add("active");
+                              document.getElementById("about").classList.remove("active");
+                                
                               }else{
                                  var city = str.slice(b+6,str.length);
                                  var weather_code = str.slice(a+2,b);
@@ -207,16 +217,14 @@
                                 
                                 //set values in input form from url
                                 document.getElementById("Where").value = city;
-                                
-                               // var sz = document.forms['Form'].elements['wheather'];
-                                                                         
                                             for (var i = 0; i < sz.length; i++) {
-                                               
                                               if (sz[i].value === weather_code){
                                             	sz[i].checked=true;
                                               }
                                             }
                               }
+          
+          					
                               
                              
                                             //]]>
