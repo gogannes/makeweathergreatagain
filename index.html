@@ -4,6 +4,9 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script>
+      if (0)
+        
+      {
       (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -18,6 +21,7 @@
 
         ga('create', 'UA-87680784-1', 'auto');
         ga('send', 'pageview');
+      }
     </script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
@@ -25,14 +29,27 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="jumbotron">
               <p id="weather_in">München City</p>
               <p id="date">Today, Nov 13</p>
               <div id="p0" class="hidden">
                 <img src="weather/01.png" class="img-responsive">Make your own weather.</div>
-              <div id="p1" class="hidden">
-                <img src="weather/01.png" class="img-responsive">32°C, sun, feels like 34°C</div>
+              <div class="row" id="p1">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date">Today, Nov 13</p>
+                    <p>
+                      <span style="font-size:50px">32</span>°C
+                      <br>sun, feels like 34°C, enjoy it</p>
+                  </div>
+                </div>
+              </div>
               <div class="hidden" id="p2">
                 <img src="weather/18.png" class="img-responsive">12°C, rain, feels like 2°C</div>
               <div class="hidden" id="p3">
@@ -49,7 +66,7 @@
                 <img src="weather/42.png" class="img-responsive">12°C, rain, end of world, feels like shit</div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <br>
             <ul class="nav nav-tabs" style="font-size:13px">
               <li class="active" id="li1">
@@ -136,23 +153,28 @@
                     //<![CDATA[
 
                                     function share() {
+                                        //read inputs
+                                        var text_where=document.getElementById("Where").value;
                                         var radios = document.getElementsByTagName('input');
-                                        var value;
+                                        var checked_button;
                                         for (var i = 0; i < radios.length; i++) {
                                             if (radios[i].type === 'radio' && radios[i].checked) {
                                                 // get value, set checked flag or do whatever you need to
-                                                value = radios[i].value;
+                                                checked_button = radios[i].value;
                                             }
                                         }
-
-                                        var weatherno = 1;
-                                        var mystr = "http://makeweathergreatagain.com/?w" + value + "?city=" + document.getElementById("Where").value;
-
-                                        document.getElementById("linktext").innerHTML = "debug: " + mystr;
-
-
+                                        
+                                        //creat link text
+                                        var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
+										
+                                       //set link text for debug
+                                        document.getElementById("linktext").innerHTML = "debug: " + text_link;
+			
+										//set hyperlink
                                         var temp = document.getElementById('link');
-                                        temp.setAttribute('href', mystr);
+                                        temp.setAttribute('href', text_link);
+                                      
+                                        //to do set url in browser (this is tricky as it usually leads to a reload. that makes sense, because else one could make people believe to be at a certain website...) 
 
                                     }
 
