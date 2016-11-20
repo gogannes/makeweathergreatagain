@@ -196,7 +196,8 @@
                                         }
                                         
                                         //creat link text
-                                        var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
+					var location = window.location;    
+                                        var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
 										
                                        //set link text for debug
                                         document.getElementById("linktext").innerHTML = "debug: " + text_link;
