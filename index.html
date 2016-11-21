@@ -11,64 +11,43 @@
 	
 	
     <script type="text/javascript">
-      // global variable
-      var old_weather_code="NA";
+      function stateFromInput() {
+        var text_where = document.getElementById('Where').value;
+        var weather = document.querySelector('input[name="weather"]:checked').value;
+        return {w: weather, city: text_where};
+      }
+      function presentState(state) {
+        // only if weather code has changed = radio button has been changed
+        document.querySelectorAll('.jumbotron').forEach(function (el) {
+          el.classList.add('hidden');
+        });
+        document.getElementById('p_' + state.w).classList.remove('hidden');
+        document.querySelectorAll('.city').forEach(function (el) {
+          el.innerHTML = state.city;
+        });
+      }
+      function initOrUpdateShareButtons() {
+        $("#share_buttons").jsSocials({
+          text: "Make Weather Great Again",
+          showLabel: true,
+          showCount: false,
+          shares: ["email", "twitter", "googleplus", "facebook", "pinterest", "whatsapp"]
+        });
+      }
       //////////////////////////////////////////////////
-        // function to be executed each time form is changed
-        function update_all() {
-            //read inputs
-            var text_where = document.getElementById("Where").value;
-            var radios = document.getElementsByTagName('input');
-            var checked_button;
-            for (var i = 0; i < radios.length; i++) {
-                if (radios[i].type === 'radio' && radios[i].checked) {
-                    // get value, set checked flag or do whatever you need to
-                    checked_button = radios[i].value;
-                }
-            }
-
-            //create link text
-            //var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
-			var location = window.location;    
-            var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
-  					
-            //set link text for debug
-            document.getElementById("linktext").innerHTML = "debug: " + text_link;
-
-            //set hyperlink
-            var temp = document.getElementById('link');
-            temp.setAttribute('href', text_link);
-
-            //update weather page instantaniously
-            var city = text_where;
-            var weather_code = checked_button;
-
-          // remove weather jumbotron 0 in case it was actve 
-          $("#p_0").addClass('hidden');
-
-          
-           if (old_weather_code===weather_code){
-          }else{// only if weather code has changed = radio button has been changed
-            var str_id = "#p_" + old_weather_code;                    
-            $(str_id).addClass('hidden');
-
-            var str_id = "#p_" + weather_code;          
-            $(str_id).removeClass('hidden');
-            
-            old_weather_code=weather_code;
-          }
-
-            var str_weather_id = "weather_in_" + weather_code;
-            document.getElementById(str_weather_id).innerHTML = city;
-
-            //set date
-            var str_date_id = "date_" + weather_code;
-            document.getElementById(str_date_id).innerHTML = "Today, " + d;
-
-          
-            //to do set url in browser (this is tricky as it usually leads to a reload. that makes sense, because else one could make people believe to be at a certain website...) 
-
-        }
+      // function to be executed each time form is changed
+      function createLink(state) {
+        var loc = window.location;
+        return loc.protocol + '//' + loc.host + loc.pathname + '?w=' + state.w + '&city=' + encodeURIComponent(state.city);
+      }
+      function update_all() {
+        var state = stateFromInput();
+        var link = createLink(state);
+        window.history.replaceState(null, '', link);
+        document.getElementById('link').setAttribute('href', link);
+        initOrUpdateShareButtons();
+        presentState(state);
+      }
     </script>
     <script>
       (function(i, s, o, g, r, a, m) {
@@ -91,7 +70,7 @@
  
 	<style>
 	.jumbotron{
-	padding-top:15;
+	padding-top: 15px;
 	}
 	</style>
 	
@@ -101,8 +80,8 @@
         <div class="row">
           <div class="col-md-7">
             <!-- ELEMENT 0 -->
-            <div class="jumbotron hidden" id="p_0">
-              <p id="weather_in_0" style="font-size:25px">Make Weather Great Again!</p>
+            <div class="jumbotron" id="p_0">
+              <p id="weather_in_0" class="city" style="font-size:25px">Make Weather Great Again!</p>
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -111,7 +90,7 @@
                 </div>
                 <div class="col-xs-5">
                   <div>
-                    <p id="date_0" style="font-size:14px">Today, Nov 13</p>
+                    <p id="date_0" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
                       <span style="font-size:50px">32</span>°C
                   </div>
@@ -133,7 +112,7 @@
             <!-- ELEMENT 0 END -->
             <!-- ELEMENT 1 -->
             <div class="jumbotron hidden" id="p_1">
-              <p id="weather_in_1" style="font-size:25px">Element 1</p>
+              <p id="weather_in_1" class="city" style="font-size:25px">Element 1</p>
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -142,7 +121,7 @@
                 </div>
                 <div class="col-xs-5">
                   <div>
-                    <p id="date_1" style="font-size:14px">Today, Nov 13</p>
+                    <p id="date_1" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
                       <span style="font-size:50px">32</span>°C
                       <br>sun, feels like 34°C, enjoy it</p>
@@ -185,7 +164,7 @@
             <!-- ELEMENT 1 END -->
             <!-- ELEMENT 2 -->
             <div class="jumbotron hidden" id="p_2">
-              <p id="weather_in_2" style="font-size:25px">Element 2</p>
+              <p id="weather_in_2" class="city" style="font-size:25px">Element 2</p>
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -194,7 +173,7 @@
                 </div>
                 <div class="col-xs-5">
                   <div>
-                    <p id="date_2" style="font-size:14px">Today, Nov 13</p>
+                    <p id="date_2" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
                       <span style="font-size:50px">2</span>°C
                       <br>rain, feels like -5°C, stay home</p>
@@ -237,7 +216,7 @@
             <!-- ELEMENT 2 END -->
             <!-- ELEMENT 3 -->
             <div class="jumbotron hidden" id="p_3">
-              <p id="weather_in_3" style="font-size:25px">Element 3</p>
+              <p id="weather_in_3" class="city" style="font-size:25px">Element 3</p>
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -246,7 +225,7 @@
                 </div>
                 <div class="col-xs-5">
                   <div>
-                    <p id="date_3" style="font-size:14px">Today, Nov 13</p>
+                    <p id="date_3" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
                       <span style="font-size:50px">-87</span>°C
                       <br>heavy rain, hail, no sun, feels like shit, better leave our solar system</p>
@@ -290,8 +269,8 @@
           <div class="col-md-5">
             <br>
             <ul class="nav nav-tabs" style="font-size:13px">
-              <li class="active" id="li1">
-                <a data-toggle="pill" href="#share">Share</a>
+              <li id="li1">
+                <a data-toggle="pill" href="#share_buttons">Share</a>
               </li>
               <li id="li2">
                 <a data-toggle="pill" href="#make">Make Weather Great Again</a>
@@ -301,23 +280,14 @@
               </li>
             </ul>
             <div class="tab-content">
-		<div class="tab-pane fade in " id="share">
 			<br>
-			<div class="tab-pane fade in " id="share_buttons">
+			<div class="tab-pane" id="share_buttons">
 			<!-- http://js-socials.com -->    
 			<script>
-				$("#share_buttons").jsSocials({
-				url: document.URL,
-				text: "Make Weather Great Again",
-				showLabel: true,
-				showCount: false,
-
-				shares: ["email", "twitter",  "googleplus", "facebook", "pinterest", "whatsapp"]
-				});
+              initOrUpdateShareButtons();
 			</script>
 			</div>
-		</div>
-              <div class="tab-pane fade in active" id="make">
+              <div class="tab-pane" id="make">
                 <p>
                   <br>Want to go for BBQ, skiing, swimming?
                   <br>Motivate your friends with great weather!
@@ -332,22 +302,21 @@
                     </p>Make weather:
                     <div class="radio">
                       <label>
-                        <input type="radio" name="wheather" value="1" checked="checked">great again</label>
+                        <input type="radio" name="weather" value="1" checked="checked">great again</label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="wheather" value="2">shitty</label>
+                        <input type="radio" name="weather" value="2">shitty</label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" value="3" name="wheather">burn more coal!1</label>
+                        <input type="radio" value="3" name="weather">burn more coal!</label>
                     </div>
-                    <a class="btn btn-primary" id="link" href="https://makeweathergreatagain.com/?w1?city=Munich" target="_blank" name="link">Create your own weather!</a>
-                    <div id="linktext" style="font-size:12px">debug link text</div>
+                    <a class="btn btn-primary" id="link" href="?w=1&city=Munich" name="link">Create your own weather!</a>
                   </div>
                 </form>
               </div>
-              <div id="about" class="tab-pane fade in">
+              <div id="about" class="tab-pane">
                 <p>
                   <br>We make weather great again.
                   <br>We believe it shouldn't be difficult to change the weather.
@@ -368,103 +337,48 @@
 		  </a>
 		</p>
 		      
-		      <p style="font-size:10"><br><br><br>Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
+		      <p style="font-size: 10px"><br><br><br>Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
 
               </div>
             </div>
           </div>
         </div>
-        <script type="text/javascript">
-          //////////////////////////////////////////////////
-                // code to be executed after page is loaded
 
-                // link changes in radio buttions with "update_all()"          
-                var sz = document.forms['Form'].elements['wheather'];
-                for (var i = 0; i < sz.length; i++) {
-                    sz[i].onchange = update_all;
-                }
-                // link changes in "where" form with "update_all()"          
-                document.getElementById("Where").oninput = update_all;
-
-
-
-                var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
-                var str = document.URL;
-                var a = str.search('\\?w');
-                var b = str.search("\\?city=");
-
-                if (a == -1 || b == -1) { //url without correct parameters
-                    document.getElementById("weather_in_0").innerHTML = "Make Weather Great Again";
-                    //set date
-                    document.getElementById("date_0").innerHTML = "Today, " + d;
-                    //show jumbotron
-                    $("#p_0").removeClass('hidden');
-
-                    //show directly tab "make weather great again"
-                    document.getElementById("li1").classList.remove("active");
-                    document.getElementById("li2").classList.add("active");
-                    document.getElementById("li3").classList.remove("active");
-
-                    document.getElementById("share").classList.remove("active");
-                    document.getElementById("make").classList.add("active");
-                    document.getElementById("about").classList.remove("active");
-
-                  //create link text
-                  //var text_link = "http://makeweathergreatagain.com/?w" + checked_button + "?city=" + text_where;
-                //  var location = window.location;    
-                 // var text_link = location.protocol + '//' + location.host + location.pathname + "?w" + checked_button + "?city=" + text_where;
-
-                  //set link text for debug
-                  //document.getElementById("linktext").innerHTML = "debug: " + text_link;
-
-                  //set hyperlink
-                  //var temp = document.getElementById('link');
-                  //temp.setAttribute('href', text_link);
-
-                  
-                  
-
-                } else { //url with correct parameters
-                    var city = str.slice(b + 6, str.length);
-                    var weather_code = str.slice(a + 2, b);
-
-                    var str_id = "#p_" + weather_code;
-                    $(str_id).removeClass('hidden');
-
-                    var str_weather_id = "weather_in_" + weather_code;
-                    document.getElementById(str_weather_id).innerHTML = city;
-
-                    //set date
-                    var str_date_id = "date_" + weather_code;
-                    document.getElementById(str_date_id).innerHTML = "Today, " + d;
-
-
-                    //set values in input form form from url
-                    document.getElementById("Where").value = city;
-                    for (var i = 0; i < sz.length; i++) {
-                        if (sz[i].value === weather_code) {
-                            sz[i].checked = true;
-                        }
-                    }
-
-
-                    //execute update_all() once
-                    update_all();
-                  
-                    //show directly tab "share"
-                    document.getElementById("li1").classList.add("active");
-                    document.getElementById("li2").classList.remove("active");
-                    document.getElementById("li3").classList.remove("active");
-
-                    document.getElementById("share").classList.add("active");
-                    document.getElementById("make").classList.remove("active");
-                    document.getElementById("about").classList.remove("active");
-
-
-                }
-        </script>
       </div>
     </div>
-  
 
+    <script type="text/javascript">
+      //////////////////////////////////////////////////
+      // code to be executed after page is loaded
+
+      var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
+      document.querySelectorAll('.date').forEach(function (element) {
+        element.innerHTML = "Today, " + d;
+      });
+
+      var query = window.location.search;
+      console.log('query: ' + query);
+      if (query) {
+        var weather_query, city_query;
+        [weather_query, city_query] = query.split('&', 2);
+        var weather = weather_query.substring(3);
+        var city = city_query.substring(5);
+        var state = {w: weather, city: city};
+        presentState(state);
+        document.getElementById('link').setAttribute('href', createLink(state));
+        document.getElementById("Where").value = city;
+        document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
+        document.getElementById("li1").classList.add("active");
+        document.getElementById("share_buttons").classList.add("active", "fade", "in");
+      } else {
+        //show directly tab "make weather great again"
+        document.getElementById("li2").classList.add("active");
+        document.getElementById("make").classList.add("active", "fade", "in");
+      }
+      // add event listeners to input fields:
+      document.querySelectorAll('input[name="weather"]').forEach(function (el) {
+        el.onchange = update_all;
+      });
+      document.getElementById("Where").oninput = update_all;
+    </script>
 </body></html>
