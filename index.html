@@ -3,6 +3,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+	<!-- share buttions from http://js-socials.com -->    
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+	
+	
     <script type="text/javascript">
       // global variable
       var old_weather_code="NA";
@@ -276,24 +283,22 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane fade in " id="share">
-                <p>
-                  <br>
-                  <a><i class="fa fa-4x fa-fw fa-share-alt-square"></i></a>
-                  <a><i class="fa fa-4x fa-fw fa-facebook-square"></i></a>
-                  <a><i class="fa fa-4x fa-fw fa-envelope-square"></i></a>
-                  <a id="whatsapp" href="none"><i class="fa fa-4x fa-fw fa-whatsapp"></i></a>
-                  <script type="text/javascript">
-                    //<![CDATA[
-                                    var text = "whatsapp://send?text=" + document.URL;
-                                    //var text="mailto:?subject=Weather&amp;body=http%3A%2F%2Fmgwa.jimdo.com%2Fweather%2F";
-                                    //var x = document.getElementsByClassName("cc-sharebuttons-mail");
-                                    //x[0].href=text;
-                                    document.getElementById("whatsapp").href = text;
-                                    //]]>
-                  </script>
-                </p>
-              </div>
+		<div class="tab-pane fade in " id="share">
+			<br>
+			<div class="tab-pane fade in " id="share_buttons">
+			<!-- http://js-socials.com -->    
+			<script>
+				$("#share_buttons").jsSocials({
+				url: document.URL,
+				text: "Make Weather Great Again",
+				showLabel: true,
+				showCount: false,
+
+				shares: ["email", "twitter",  "googleplus", "facebook", "pinterest", "whatsapp"]
+				});
+			</script>
+			</div>
+		</div>
               <div class="tab-pane fade in active" id="make">
                 <p>
                   <br>Want to go for BBQ, skiing, swimming?
