@@ -295,7 +295,7 @@
                   <br>Excuse yourself with bad weather!&nbsp;
                   <br>
                   <br>It's never been so easy to make weather great again!</p>
-                <form class="form" id="Form">
+                <form class="form" id="Form" onsubmit="return false;">
                   <div class="form-group">
                     <p>Where:
                       <input class="form-control" id="Where" type="text" value="Munich">
@@ -356,29 +356,33 @@
         element.innerHTML = "Today, " + d;
       });
 
-      var query = window.location.search;
-      console.log('query: ' + query);
-      if (query) {
-        var weather_query, city_query;
-        [weather_query, city_query] = query.split('&', 2);
-        var weather = weather_query.substring(3);
-        var city = city_query.substring(5);
-        var state = {w: weather, city: city};
-        presentState(state);
-        document.getElementById('link').setAttribute('href', createLink(state));
-        document.getElementById("Where").value = city;
-        document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
-        document.getElementById("li1").classList.add("active");
-        document.getElementById("share_buttons").classList.add("active", "fade", "in");
-      } else {
-        //show directly tab "make weather great again"
-        document.getElementById("li2").classList.add("active");
-        document.getElementById("make").classList.add("active", "fade", "in");
+      try {
+        var query = window.location.search;
+        console.log('query: ' + query);
+        if (query) {
+          var weather_query, city_query;
+          [weather_query, city_query] = query.split('&', 2);
+          var weather = weather_query.substring(3);
+          var city = city_query.substring(5);
+          var state = {w: weather, city: city};
+          presentState(state);
+          document.getElementById('link').setAttribute('href', createLink(state));
+          document.getElementById("Where").value = city;
+          document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
+          document.getElementById("li1").classList.add("active");
+          document.getElementById("share_buttons").classList.add("active", "fade", "in");
+        } else {
+          //show directly tab "make weather great again"
+          document.getElementById("li2").classList.add("active");
+          document.getElementById("make").classList.add("active", "fade", "in");
+        }
+      } finally {
+        // add event listeners to input fields:
+        document.querySelectorAll('input[name="weather"]').forEach(function (el) {
+          el.onchange = update_all;
+        });
+        document.getElementById("Where").oninput = update_all;
       }
-      // add event listeners to input fields:
-      document.querySelectorAll('input[name="weather"]').forEach(function (el) {
-        el.onchange = update_all;
-      });
-      document.getElementById("Where").oninput = update_all;
+
     </script>
 </body></html>
