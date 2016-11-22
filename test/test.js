@@ -30,12 +30,12 @@ driver.getPageSource().then(function (src) {
 
 console.log('searching form..');
 //driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack');
-driver.findElement(webdriver.By.id('Form')).isDisplayed().then(function(result) {
+driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(result) {
   console.log('editor shown (no query): ' + result);
 });
 
-driver.get('http://makeweathergreatagain.test?w=2&city=Testcity');
-driver.findElement(webdriver.By.id('Form')).isDisplayed().then(function(result) {
+driver.get('http://localhost:8080/?w=2&city=Testcity');
+driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(result) {
   console.log('editor shown (with query): ' + result);
 });
 
