@@ -21,7 +21,7 @@ var driver = new webdriver.Builder().
   build();
 
 console.log('fetching page..');
-driver.get('http://makeweathergreatagain.test');
+driver.get('http://localhost:8080/');
 
 console.log('fetching source..');
 driver.getPageSource().then(function (src) {
