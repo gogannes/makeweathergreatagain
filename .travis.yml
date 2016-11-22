@@ -12,6 +12,7 @@ before_script:
 - npm install mocha -g
 script: 
 - http-server -a localhost -p 8080 &
+- sleep 3
 - mocha test/test.js
 addons:
   browserstack:
