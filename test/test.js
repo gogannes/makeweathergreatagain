@@ -21,6 +21,7 @@ var driver = new webdriver.Builder().
   build();
 
 test.describe('Test MWGA', function() {
+  this.timeout(10000);
   after(function() {
     // runs after all tests in this block
 	console.log('quitting driver..');
