@@ -15,26 +15,29 @@ var capabilities = {
   'build' : 'First build'
 }
 
+var driver = new webdriver.Builder().
+  usingServer('http://hub-cloud.browserstack.com/wd/hub').
+  withCapabilities(capabilities).
+  build();
+
 test.describe('Test MWGA', function() {
   after(function() {
     // runs after all tests in this block
 	console.log('quitting driver..');
 	driver.quit();
   });
-  test.it('Testing default view', function() {
-    var driver = new webdriver.Builder().
-      usingServer('http://hub-cloud.browserstack.com/wd/hub').
-      withCapabilities(capabilities).
-      build();
+  test.it('Testing default view', function(done) {
     driver.get('http://localhost:8080/');
-	return driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
+	driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
       assert.equal(displayed, 'input must be displayed on default view');
+	  done();
     });
   });
-  test.it('Testing link/share view', function() {
+  test.it('Testing link/share view', function(done) {
     driver.get('http://localhost:8080/?w=2&city=Testcity');
-    return driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
+    driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
       assert.equal(!displayed, 'input must not be displayed on share link/view');
+	  done();
     });
   });
 });
