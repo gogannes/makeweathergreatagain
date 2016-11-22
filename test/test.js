@@ -2,12 +2,14 @@
 var webdriver = require('selenium-webdriver');
 //var test = require('selenium-webdriver/testing');
 
+console.log('Starting test..');
+
 // Input capabilities
 var capabilities = {
   'browserName' : 'chrome',
   'browserstack.local' : 'true',
   'browserstack.localIdentifier' :  process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
-  'user' : process.env.BROWSERSTACK_USER,
+  'browserstack.user' : process.env.BROWSERSTACK_USER,
   'browserstack.key' : process.env.BROWSERSTACK_KEY,
   'browserstack.debug' : 'true',
   'build' : 'First build'
