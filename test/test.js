@@ -31,7 +31,7 @@ test.describe('Test MWGA', function() {
     driver.get('http://localhost:8080/');
 	driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
       console.log('input displayed (no query): ' + displayed);
-      assert.equal(displayed, 'input must be displayed on default view');
+      assert.equal(displayed, true, 'input must be displayed on default view');
 	  done();
     });
   });
@@ -39,7 +39,7 @@ test.describe('Test MWGA', function() {
     driver.get('http://localhost:8080/?w=2&city=Testcity');
     driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
 		console.log('input displayed (with query): ' + displayed);
-      assert.equal(!displayed, 'input must not be displayed on share link/view');
+      assert.equal(displayed, false, 'input must not be displayed on share link/view');
 	  done();
     });
   });
