@@ -12,6 +12,10 @@
 	
 	
     <script type="text/javascript">
+      // patch NodeList (used via querySelectorAll) for older Browsers:
+      if(!NodeList.prototype.hasOwnProperty('forEach')) {
+	    NodeList.prototype.forEach = Array.prototype.forEach;
+      }
       function stateFromInput() {
         var text_where = document.getElementById('Where').value;
         var weather = document.querySelector('input[name="weather"]:checked').value;
