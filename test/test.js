@@ -20,7 +20,15 @@ var driver = new webdriver.Builder().
   withCapabilities(capabilities).
   build();
 
+console.log('fetching page..');
 driver.get('http://makeweathergreatagain.test');
+
+console.log('fetching source..');
+driver.getPageSource().then(function (src) {
+    console.log('source: ' + src);
+});
+
+console.log('searching form..');
 //driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack');
 driver.findElement(webdriver.By.id('Form')).isDisplayed().then(function(result) {
   console.log('editor shown (no query): ' + result);
