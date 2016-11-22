@@ -365,8 +365,9 @@
         var query = window.location.search;
         console.log('query: ' + query);
         if (query) {
-          var weather_query, city_query;
-          [weather_query, city_query] = query.split('&', 2);
+          var splittedQuery = query.split('&', 2);
+	  var weather_query = splittedQuery[0];
+	  var city_query = splittedQuery[1];
           var weather = weather_query.substring(3);
           var city = city_query.substring(5);
           var state = {w: weather, city: city};
