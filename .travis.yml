@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - "6"
+
+env:
+  global:
+    - BROWSERSTACK_USER=danielschreiber1
+    # BROWSERSTACK_KEY:
+    - secure: mcUCykGm4bUZ3C TODO
+
+before_script:
+  - npm install -g selenium-webdriver
+
+script: node test/test.js
+
+addons:
+  browserstack:
+    username: "danielschreiber1"
+    access_key:
+      secure: "TODO The secure string output of `travis encrypt`"
