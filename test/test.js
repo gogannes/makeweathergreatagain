@@ -1,6 +1,6 @@
-//var assert = require('assert');
+var assert = require('assert'),
+var test = require('selenium-webdriver/testing');
 var webdriver = require('selenium-webdriver');
-//var test = require('selenium-webdriver/testing');
 
 console.log('Starting test..');
 
@@ -15,28 +15,20 @@ var capabilities = {
   'build' : 'First build'
 }
 
-var driver = new webdriver.Builder().
-  usingServer('http://hub-cloud.browserstack.com/wd/hub').
-  withCapabilities(capabilities).
-  build();
-
-console.log('fetching page..');
-driver.get('http://localhost:8080/');
-
-console.log('fetching source..');
-driver.getPageSource().then(function (src) {
-    console.log('source: ' + src);
+test.describe('Test MWGA', function() {
+  test.it('Testing default view and link/share view', function() {
+    var driver = new webdriver.Builder().
+      usingServer('http://hub-cloud.browserstack.com/wd/hub').
+      withCapabilities(capabilities).
+      build();
+    driver.get('http://localhost:8080/');
+	driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
+      assert.equal(displayed, 'input must be displayed on default view');
+    });
+    driver.get('http://localhost:8080/?w=2&city=Testcity');
+    driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(displayed) {
+      assert.equal(!displayed, 'input must not be displayed on share link/view');
+    });
+    driver.quit();
+  });
 });
-
-console.log('searching form..');
-//driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack');
-driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(result) {
-  console.log('editor shown (no query): ' + result);
-});
-
-driver.get('http://localhost:8080/?w=2&city=Testcity');
-driver.findElement(webdriver.By.id('Where')).isDisplayed().then(function(result) {
-  console.log('editor shown (with query): ' + result);
-});
-
-driver.quit();

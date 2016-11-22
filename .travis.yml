@@ -9,9 +9,10 @@ env:
 before_script:
 - npm install selenium-webdriver
 - npm install http-server -g
+- npm install mocha -g
 script: 
 - http-server -a localhost -p 8080 &
-- node test/test.js
+- mocha test/test.js
 addons:
   browserstack:
     username: danielschreiber1
