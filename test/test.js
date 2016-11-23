@@ -16,10 +16,10 @@ var capabilities = {
 }
 
 if(process.env.BROWSER_VERSION) {
-  capabilities.browserstack.browser_version = process.env.BROWSER_VERSION;
+  capabilities['browserstack.browser_version'] = process.env.BROWSER_VERSION;
 }
 if(process.env.DEVICE) {
-  capabilities.browserstack.device = process.env.DEVICE;
+  capabilities['browserstack.device'] = process.env.DEVICE;
 }
 
 var driver = new webdriver.Builder().
