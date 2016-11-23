@@ -9,7 +9,7 @@ env:
   matrix:
   - BROWSER_NAME=chrome
   - BROWSER_NAME=IE BROWSER_VERSION=11.0
-  - BROWSER_NAME=android DEVICE="Samsung Galaxy S5 Mini"
+  - BROWSER_NAME=android DEVICE="Samsung Galaxy S5"
 before_script:
 - npm install selenium-webdriver
 - npm install http-server -g
