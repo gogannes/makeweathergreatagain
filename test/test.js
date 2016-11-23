@@ -6,13 +6,20 @@ console.log('Starting test..');
 
 // Input capabilities
 var capabilities = {
-  'browserName' : 'chrome',
+  'browserName' : process.env.BROWSER_NAME,
   'browserstack.local' : 'true',
   'browserstack.localIdentifier' :  process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
   'browserstack.user' : process.env.BROWSERSTACK_USER,
   'browserstack.key' : process.env.BROWSERSTACK_KEY,
   'browserstack.debug' : 'true',
-  'build' : 'First build'
+  'build' : process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BRANCH + ')'
+}
+
+if(process.env.BROWSER_VERSION) {
+  capabilities.browserstack.browser_version = process.env.BROWSER_VERSION;
+}
+if(process.env.DEVICE) {
+  capabilities.browserstack.device = process.env.DEVICE;
 }
 
 var driver = new webdriver.Builder().
@@ -22,10 +29,13 @@ var driver = new webdriver.Builder().
 
 test.describe('Test MWGA', function() {
   this.timeout(10000);
-  after(function() {
+  after(function(done) {
     // runs after all tests in this block
 	console.log('quitting driver..');
-	driver.quit();
+	driver.quit().then(function() {
+	  console.log('quit driver');
+	  done();
+	});
   });
   test.it('Testing default view', function(done) {
     driver.get('http://localhost:8080/');
