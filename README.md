@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gogannes/makeweathergreatagain.svg)](https://travis-ci.org/gogannes/makeweathergreatagain)
+
 # Make Weather Greate Again
 
 This project aims to create a weather (web-)app, where users can create their own weather: http://makeweathergreatagain.com
