@@ -25,7 +25,7 @@
                 });
                 document.getElementById('p_' + state.w).classList.remove('hidden');
                 document.querySelectorAll('.city').forEach(function (el) {
-                  el.innerHTML = state.city;
+                  el.innerHTML = decodeURI(state.city);
                 });
               }
               function initOrUpdateShareButtons() {
