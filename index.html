@@ -9,70 +9,78 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css">
     <script type="text/javascript">
       // patch NodeList (used via querySelectorAll) for older Browsers:
-              if(!NodeList.prototype.hasOwnProperty('forEach')) {
-        	    NodeList.prototype.forEach = Array.prototype.forEach;
-              }
-              function stateFromInput() {
-                var text_where = document.getElementById('Where').value;
-                var weather = document.querySelector('input[name="weather"]:checked').value;
-                return {w: weather, city: text_where};
-              }
-              function presentState(state) {
-                // only if weather code has changed = radio button has been changed
-                document.querySelectorAll('.jumbotron').forEach(function (el) {
-                  el.classList.add('hidden');
-        		  //el.classList.remove('hidden'); //just for debugging to see everything in browser
-                });
-                document.getElementById('p_' + state.w).classList.remove('hidden');
-                document.querySelectorAll('.city').forEach(function (el) {
-                  el.innerHTML = decodeURI(state.city);
-                });
-              }
-              function initOrUpdateShareButtons() {
+        if (!NodeList.prototype.hasOwnProperty('forEach')) {
+            NodeList.prototype.forEach = Array.prototype.forEach;
+        }
+
+        function stateFromInput() {
+            var text_where = document.getElementById('Where').value;
+            var weather = document.querySelector('input[name="weather"]:checked').value;
+            return {
+                w: weather,
+                city: text_where
+            };
+        }
+
+        function presentState(state) {
+            // only if weather code has changed = radio button has been changed
+            document.querySelectorAll('.jumbotron').forEach(function(el) {
+                el.classList.add('hidden');
+                //el.classList.remove('hidden'); //just for debugging to see everything in browser
+            });
+            document.getElementById('p_' + state.w).classList.remove('hidden');
+            document.querySelectorAll('.city').forEach(function(el) {
+                el.innerHTML = decodeURI(state.city);
+            });
+        }
+
+        function initOrUpdateShareButtons() {
                 $("#share_buttons").jsSocials({
-                  text: "Make Weather Great Again",
-                  showLabel: true,
-                  showCount: false,
-                  shares: ["email", "twitter", "googleplus", "facebook", "pinterest", "whatsapp"]
+                    text: "Make Weather Great Again",
+                    showLabel: true,
+                    showCount: false,
+                    shares: ["email", "twitter", "googleplus", "facebook", "pinterest", "whatsapp"]
                 });
-              }
-              //////////////////////////////////////////////////
-              // function to be executed each time form is changed
-              function createLink(state) {
-                var loc = window.location;
-                return loc.protocol + '//' + loc.host + loc.pathname + '?w=' + state.w + '&city=' + encodeURIComponent(state.city);
-              }
-              function update_all() {
-                var state = stateFromInput();
-                var link = createLink(state);
-                window.history.replaceState(null, '', link);
-                document.getElementById('link').setAttribute('href', link);
-                initOrUpdateShareButtons();
-                presentState(state);
-              }
+            }
+            //////////////////////////////////////////////////
+            // function to be executed each time form is changed
+        function createLink(state) {
+            var loc = window.location;
+            return loc.protocol + '//' + loc.host + loc.pathname + '?w=' + state.w + '&city=' + encodeURIComponent(state.city);
+        }
+
+        function update_all() {
+            var state = stateFromInput();
+            var link = createLink(state);
+            window.history.replaceState(null, '', link);
+            document.getElementById('link').setAttribute('href', link);
+            initOrUpdateShareButtons();
+            presentState(state);
+        }
     </script>
     <script>
       (function(i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function() {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        
-                ga('create', 'UA-87680784-1', 'auto');
-                ga('send', 'pageview');
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-87680784-1', 'auto');
+        ga('send', 'pageview');
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <style>
-      .jumbotron{
-            	padding-top: 15px;
-            	}
+      .jumbotron {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     </style>
     <title>MakeWeatherGreatAgain.com</title>
     <!-- http://realfavicongenerator.net/
@@ -116,14 +124,11 @@
                 <div class="col-xs-12">
                   <p style="font-size:14px">
                     <br>Pissed by bad weather?
-                    <br>Want to go for BBQ, swimming or even skiing?
-                    <br>
+                    <!--<br>Want to go for BBQ, swimming or even skiing?-->
                     <br>
                     <b>Make weather great again.</b>
                     <br>
-                    <br>It is easy to change the weather.
-                    <br>Even you can change it.
-                    <br>It's just a few clicks...</p>
+                    <br>It's just two clicks to set the weather and one click to share it!</p>
                   <p></p>
                 </div>
               </div>
@@ -553,7 +558,7 @@
                 <a data-toggle="pill" href="#share_buttons">Share</a>
               </li>
               <li id="li2">
-                <a data-toggle="pill" href="#make">Make Weather Great Again</a>
+                <a data-toggle="pill" href="#make" id="makebutton">Make Weather Great Again</a>
               </li>
               <li id="li3">
                 <a data-toggle="pill" href="#about">About</a>
@@ -568,8 +573,7 @@
                 </script>
               </div>
               <div class="tab-pane" id="make">
-                <p>Pissed by bad weather?
-                  <br>Want to go for BBQ, swimming or even skiing?
+                <p>Want to go for BBQ, swimming or even skiing?
                   <br>It is easy to change the weather. Select below and try it!</p>
                 <form class="form" id="Form" onsubmit="return false;">
                   <div class="form-group">
@@ -617,81 +621,81 @@
                           <input type="radio" value="0" name="weather">I think this website is a hoax.</label>
                       </div>
                     </div>
-                    <!--<div class="radio">
-                        <label>
-                          <input type="radio" value="" name="weather">Can you please make a solar eclipse?</label>
-                      </div>--></div>
+                  </div>
                   <a class="btn btn-primary" id="link" href="?w=1&amp;city=Munich" name="link">Create your own weather!</a>
                 </form>
               </div>
-            </div>
-            <div class="tab-pane" id="about">
-              <p>We make weather great again.
-                <br>We believe it shouldn't be difficult to change the weather.
-                <br>With our solution
-                <b>even you</b>&nbsp;can change the weather with just a few clicks.
-                <br>
-                <br>Yes We Can! Make Weather Great Again!</p>
-              <p>
-                <b>Address:</b>,
-                <br>725 5th Ave, Trump Tower,
-                <br>New York, NY 10022, USA</p>
-              <p>
-                <a href="https://github.com/gogannes/makeweathergreatagain">
-
-		    <img src="GitHub-Mark-32px.png" aria-hidden="true" alt="Github logo" width="16" height="16">
-
-		    Support
-
-		  </a>
-              </p>
-              <p style="font-size: 10px">
-                <br>
-                <br>
-                <br>Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
+              <div class="tab-pane" id="about">
+                <p>We make weather great again.
+                  <br>We believe it shouldn't be difficult to change the weather.
+                  <br>With our solution
+                  <b>even you</b>&nbsp;can change the weather and share it with in a few clicks.
+                  <br>
+                  <br>Yes We Can!
+                  <a href="#li2" onclick="$('#makebutton').click();">Make Weather Great Again!</a>
+                </p>
+                <p>
+                  <b>Address:</b>,
+                  <br>725 5th Ave, Trump Tower,
+                  <br>New York, NY 10022, USA
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                </p>
+                <p>
+                  <a href="https://github.com/gogannes/makeweathergreatagain">
+                                <img src="GitHub-Mark-32px.png" aria-hidden="true" alt="Github logo" width="16" height="16"> Support
+                            </a>
+                </p>
+                <p style="font-size: 10px">Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <script type="text/javascript">
+        //////////////////////////////////////////////////
+        // code to be executed after page is loaded
+
+        var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
+        document.querySelectorAll('.date').forEach(function(element) {
+            element.innerHTML = "Today, " + d;
+        });
+
+        try {
+            var query = window.location.search;
+            console.log('query: ' + query);
+            if (query) {
+                var splittedQuery = query.split('&', 2);
+                var weather_query = splittedQuery[0];
+                var city_query = splittedQuery[1];
+                var weather = weather_query.substring(3);
+                var city = city_query.substring(5);
+                var state = {
+                    w: weather,
+                    city: city
+                };
+                presentState(state);
+                document.getElementById('link').setAttribute('href', createLink(state));
+                document.getElementById("Where").value = city;
+                document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
+                document.getElementById("li1").classList.add("active");
+                document.getElementById("share_buttons").classList.add("active", "fade", "in");
+            } else {
+                //show directly tab "make weather great again"
+                document.getElementById("li2").classList.add("active");
+                document.getElementById("make").classList.add("active", "fade", "in");
+            }
+        } finally {
+            // add event listeners to input fields:
+            document.querySelectorAll('input[name="weather"]').forEach(function(el) {
+                el.onchange = update_all;
+            });
+            document.getElementById("Where").oninput = update_all;
+        }
+      </script>
     </div>
-    <script type="text/javascript">
-      //////////////////////////////////////////////////
-              // code to be executed after page is loaded
-        
-              var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
-              document.querySelectorAll('.date').forEach(function (element) {
-                element.innerHTML = "Today, " + d;
-              });
-        
-              try {
-                var query = window.location.search;
-                console.log('query: ' + query);
-                if (query) {
-                  var splittedQuery = query.split('&', 2);
-        	  var weather_query = splittedQuery[0];
-        	  var city_query = splittedQuery[1];
-                  var weather = weather_query.substring(3);
-                  var city = city_query.substring(5);
-                  var state = {w: weather, city: city};
-                  presentState(state);
-                  document.getElementById('link').setAttribute('href', createLink(state));
-                  document.getElementById("Where").value = city;
-                  document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
-                  document.getElementById("li1").classList.add("active");
-                  document.getElementById("share_buttons").classList.add("active", "fade", "in");
-                } else {
-                  //show directly tab "make weather great again"
-                  document.getElementById("li2").classList.add("active");
-                  document.getElementById("make").classList.add("active", "fade", "in");
-                }
-              } finally {
-                // add event listeners to input fields:
-                document.querySelectorAll('input[name="weather"]').forEach(function (el) {
-                  el.onchange = update_all;
-                });
-                document.getElementById("Where").oninput = update_all;
-              }
-    </script>
   
 
 </body></html>
