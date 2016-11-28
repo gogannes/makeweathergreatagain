@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +64,7 @@
                     a.src = g;
                     m.parentNode.insertBefore(a, m)
                 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        
+
                 ga('create', 'UA-87680784-1', 'auto');
                 ga('send', 'pageview');
     </script>
@@ -644,6 +645,10 @@
 		    Support
 
 		  </a>
+          <a href="https://www.browserstack.com">
+            <img src="browserstack-logo.png" aria-hidden="true" alt="Browserstack logo" width="16" height="16" />
+            Supported by BrowserStack
+          </a>
               </p>
               <p style="font-size: 10px">
                 <br>
@@ -657,12 +662,12 @@
     <script type="text/javascript">
       //////////////////////////////////////////////////
               // code to be executed after page is loaded
-        
+
               var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
               document.querySelectorAll('.date').forEach(function (element) {
                 element.innerHTML = "Today, " + d;
               });
-        
+
               try {
                 var query = window.location.search;
                 console.log('query: ' + query);
@@ -692,6 +697,6 @@
                 document.getElementById("Where").oninput = update_all;
               }
     </script>
-  
+
 
 </body></html>
