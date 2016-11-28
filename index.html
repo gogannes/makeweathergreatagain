@@ -1,92 +1,103 @@
-<!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	
-	<!-- share buttions from http://js-socials.com -->    
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
-	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
-	
-	
+    <!-- share buttions from http://js-socials.com -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css">
     <script type="text/javascript">
       // patch NodeList (used via querySelectorAll) for older Browsers:
-      if(!NodeList.prototype.hasOwnProperty('forEach')) {
-	    NodeList.prototype.forEach = Array.prototype.forEach;
-      }
-      function stateFromInput() {
-        var text_where = document.getElementById('Where').value;
-        var weather = document.querySelector('input[name="weather"]:checked').value;
-        return {w: weather, city: text_where};
-      }
-      function presentState(state) {
-        // only if weather code has changed = radio button has been changed
-        document.querySelectorAll('.jumbotron').forEach(function (el) {
-          el.classList.add('hidden');
-        });
-        document.getElementById('p_' + state.w).classList.remove('hidden');
-        document.querySelectorAll('.city').forEach(function (el) {
-          el.innerHTML = state.city;
-        });
-      }
-      function initOrUpdateShareButtons() {
-        $("#share_buttons").jsSocials({
-          text: "Make Weather Great Again",
-          showLabel: true,
-          showCount: false,
-          shares: ["email", "twitter", "googleplus", "facebook", "pinterest", "whatsapp"]
-        });
-      }
-      //////////////////////////////////////////////////
-      // function to be executed each time form is changed
-      function createLink(state) {
-        var loc = window.location;
-        return loc.protocol + '//' + loc.host + loc.pathname + '?w=' + state.w + '&city=' + encodeURIComponent(state.city);
-      }
-      function update_all() {
-        var state = stateFromInput();
-        var link = createLink(state);
-        window.history.replaceState(null, '', link);
-        document.getElementById('link').setAttribute('href', link);
-        initOrUpdateShareButtons();
-        presentState(state);
-      }
+              if(!NodeList.prototype.hasOwnProperty('forEach')) {
+        	    NodeList.prototype.forEach = Array.prototype.forEach;
+              }
+              function stateFromInput() {
+                var text_where = document.getElementById('Where').value;
+                var weather = document.querySelector('input[name="weather"]:checked').value;
+                return {w: weather, city: text_where};
+              }
+              function presentState(state) {
+                // only if weather code has changed = radio button has been changed
+                document.querySelectorAll('.jumbotron').forEach(function (el) {
+                  el.classList.add('hidden');
+        		  //el.classList.remove('hidden'); //just for debugging to see everything in browser
+                });
+                document.getElementById('p_' + state.w).classList.remove('hidden');
+                document.querySelectorAll('.city').forEach(function (el) {
+                  el.innerHTML = decodeURI(state.city);
+                });
+              }
+              function initOrUpdateShareButtons() {
+                $("#share_buttons").jsSocials({
+                  text: "Make Weather Great Again",
+                  showLabel: true,
+                  showCount: false,
+                  shares: ["email", "twitter", "googleplus", "facebook", "pinterest", "whatsapp"]
+                });
+              }
+              //////////////////////////////////////////////////
+              // function to be executed each time form is changed
+              function createLink(state) {
+                var loc = window.location;
+                return loc.protocol + '//' + loc.host + loc.pathname + '?w=' + state.w + '&city=' + encodeURIComponent(state.city);
+              }
+              function update_all() {
+                var state = stateFromInput();
+                var link = createLink(state);
+                window.history.replaceState(null, '', link);
+                document.getElementById('link').setAttribute('href', link);
+                initOrUpdateShareButtons();
+                presentState(state);
+              }
     </script>
     <script>
       (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function() {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-87680784-1', 'auto');
-        ga('send', 'pageview');
+                ga('create', 'UA-87680784-1', 'auto');
+                ga('send', 'pageview');
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
- 
-	<style>
-	.jumbotron{
-	padding-top: 15px;
-	}
-	</style>
-	
-	</head><body>
+    <style>
+      .jumbotron{
+            	padding-top: 15px;
+            	}
+    </style>
+    <title>MakeWeatherGreatAgain.com</title>
+    <!-- http://realfavicongenerator.net/
+    -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/faviconpath/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/faviconpath/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/faviconpath/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/faviconpath/manifest.json">
+    <link rel="mask-icon" href="/faviconpath/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/faviconpath/favicon.ico">
+    <meta name="msapplication-config" content="/faviconpath/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+  </head><body>
     <div class="section" style="padding-top:15px">
       <div class="container">
         <div class="row">
           <div class="col-md-7">
+            <div>
+              <p class="text-center">
+                <a href="http://MakeWeatherGreatAgain.com" style="text-decoration: none; color:black">MakeWeatherGreatAgain.com</a>
+              </p>
+            </div>
             <!-- ELEMENT 0 -->
             <div class="jumbotron" id="p_0">
-              <p id="weather_in_0" class="city" style="font-size:25px">Make Weather Great Again!</p>
+              <!-- <p id="weather_in_0" class="city" style="font-size:25px">Make Weather Great Again!</p>-->
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -97,25 +108,28 @@
                   <div>
                     <p id="date_0" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
-                      <span style="font-size:50px">32</span>°C
+                      <span style="font-size:50px">25</span>°C</p>
                   </div>
                 </div>
               </div>
-			  <div class="row">
-               <div class="col-xs-12">
-                    <p style="font-size:14px">
-                  <br>We make weather great again.
-                  <br>We believe it shouldn't be difficult to change the weather.
-                  <br>With our solution 
-			    <b>even you</b>&nbsp;can change the weather. It's just a few clicks.
-                <p>
-                  
+              <div class="row">
+                <div class="col-xs-12">
+                  <p style="font-size:14px">
+                    <br>Pissed by bad weather?
+                    <br>Want to go for BBQ, swimming or even skiing?
+                    <br>
+                    <br>
+                    <b>Make weather great again.</b>
+                    <br>
+                    <br>It is easy to change the weather.
+                    <br>Even you can change it.
+                    <br>It's just a few clicks...</p>
+                  <p></p>
+                </div>
               </div>
-              </div>
-			  
             </div>
             <!-- ELEMENT 0 END -->
-            <!-- ELEMENT 1 -->
+            <!-- ELEMENT 1: SUN HOT -->
             <div class="jumbotron hidden" id="p_1">
               <p id="weather_in_1" class="city" style="font-size:25px">Element 1</p>
               <div class="row">
@@ -128,8 +142,8 @@
                   <div>
                     <p id="date_1" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
-                      <span style="font-size:50px">32</span>°C
-                      <br>sun, feels like 34°C, enjoy it</p>
+                      <span style="font-size:50px">25</span>°C
+                      <br>sun, feels like 26°C, chance of rain 0%, light breeze</p>
                   </div>
                 </div>
               </div>
@@ -150,8 +164,8 @@
                 </div>
                 <div class="col-xs-3">
                   <div>
-                    <p style="font-size:14px">31°C
-                      <br>sun</p>
+                    <p style="font-size:14px">26°C
+                      <br>sun, chance of rain 1%</p>
                   </div>
                 </div>
                 <div class="col-xs-3">
@@ -161,13 +175,13 @@
                 </div>
                 <div class="col-xs-3">
                   <div>
-                    <p style="font-size:14px">no significant changes</p>
+                    <p style="font-size:14px">current high stays for 3-4 days, few clouds</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- ELEMENT 1 END -->
-            <!-- ELEMENT 2 -->
+            <!-- ELEMENT 2: RAIN COLD-->
             <div class="jumbotron hidden" id="p_2">
               <p id="weather_in_2" class="city" style="font-size:25px">Element 2</p>
               <div class="row">
@@ -181,7 +195,8 @@
                     <p id="date_2" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
                       <span style="font-size:50px">2</span>°C
-                      <br>rain, feels like -5°C, stay home</p>
+                      <br>continuous heavy rain, feels like -2°C, chance of rain 99%, gusty wind
+                      &nbsp;</p>
                   </div>
                 </div>
               </div>
@@ -203,7 +218,7 @@
                 <div class="col-xs-3">
                   <div>
                     <p style="font-size:14px">1°C
-                      <br>rain</p>
+                      <br>continious rain, strong winds</p>
                   </div>
                 </div>
                 <div class="col-xs-3">
@@ -213,15 +228,119 @@
                 </div>
                 <div class="col-xs-3">
                   <div>
-                    <p style="font-size:14px">no significant changes</p>
+                    <p style="font-size:14px">low pressure stays with no significant changes, huge floods possible</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- ELEMENT 2 END -->
-            <!-- ELEMENT 3 -->
+            <!-- ELEMENT 3: SKIING -->
             <div class="jumbotron hidden" id="p_3">
               <p id="weather_in_3" class="city" style="font-size:25px">Element 3</p>
+              <div class="row">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/23.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date_3" class="date" style="font-size:14px">Today, Nov 13</p>
+                    <p style="font-size:14px">
+                      <span style="font-size:50px">0</span>°C
+                      <br>fresh snow (40 cm), later today sun, visiblity &gt; 20km &nbsp;</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>Tomorrow</p>
+                </div>
+                <div class="col-xs-6">
+                  <p>Trend</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">1°C
+                      <br>fresh snow (20cm)</p>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">snowfall during nigts and clear sky during day</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ELEMENT 3 END -->
+            <!-- ELEMENT 4: Christmas -->
+            <div class="jumbotron hidden " id="p_4">
+              <p id="weather_in_4" class="city" style="font-size:25px">Element 4</p>
+              <div class="row">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/22.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date_4_renamedbecausenochangesrequired" class="date" style="font-size:14px">Today, Dez 24</p>
+                    <p style="font-size:14px">
+                      <span style="font-size:50px">1</span>°C
+                      <br>heavy snowfall all Christmas Eve</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>Tomorrow</p>
+                </div>
+                <div class="col-xs-6">
+                  <p>Trend</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">2°C
+                      <br>sun, fresh snow (10 cm)</p>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">snowfall during nigts and clear sky during days</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ELEMENT 4 END -->
+            <!-- ELEMENT 5 Apocalypse -->
+            <div class="jumbotron hidden " id="p_5">
+              <p id="weather_in_5" class="city" style="font-size:25px">Element 5</p>
               <div class="row">
                 <div class="col-xs-7">
                   <div>
@@ -230,10 +349,10 @@
                 </div>
                 <div class="col-xs-5">
                   <div>
-                    <p id="date_3" class="date" style="font-size:14px">Today, Nov 13</p>
+                    <p id="date_5" class="date" style="font-size:14px">Today, Nov 13</p>
                     <p style="font-size:14px">
-                      <span style="font-size:50px">-87</span>°C
-                      <br>heavy rain, hail, no sun, feels like shit, better leave our solar system</p>
+                      <span style="font-size:50px">-42</span>°C
+                      <br>heavy hail (diam. &gt;13cm), thunder, no sun, geomagnetic storm</p>
                   </div>
                 </div>
               </div>
@@ -254,7 +373,7 @@
                 </div>
                 <div class="col-xs-3">
                   <div>
-                    <p style="font-size:14px">it's not gonna be better</p>
+                    <p style="font-size:14px">earthquakes magnitude 9.5+</p>
                   </div>
                 </div>
                 <div class="col-xs-3">
@@ -269,7 +388,163 @@
                 </div>
               </div>
             </div>
-            <!-- ELEMENT 3 END -->
+            <!-- ELEMENT 5 END -->
+            <!-- ELEMENT 6: Office -->
+            <div class="jumbotron hidden" id="p_6">
+              <p id="weather_in_6" class="city" style="font-size:25px">Element 6</p>
+              <div class="row">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date_6" class="date" style="font-size:14px">Today, Nov 13</p>
+                    <p style="font-size:14px">
+                      <span style="font-size:50px">26</span>°C
+                      <br>sun, feels like 27°C, chance of rain 0%, light breeze</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>Tomorrow</p>
+                </div>
+                <div class="col-xs-6">
+                  <p>Trend</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">26°C
+                      <br>sun, chance of rain 1%</p>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/02.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">current high stays for 3-4 days, few clouds</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ELEMENT 6 END -->
+            <!-- ELEMENT 7: Chennai -->
+            <div class="jumbotron hidden " id="p_7">
+              <p id="weather_in_7" class="city" style="font-size:25px">Element 6</p>
+              <div class="row">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/30.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date_7" class="date" style="font-size:14px">Today, Nov 13</p>
+                    <p style="font-size:14px">
+                      <span style="font-size:50px">36</span>°C
+                      <br>sun, no clouds, feels like 38°C, humidity 97%, light breeze</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>Tomorrow</p>
+                </div>
+                <div class="col-xs-6">
+                  <p>Trend</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/01.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">34°C
+                      <br>sun, no clouds, you won't stop sweating!</p>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/13.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">Prepare, next Monsoon is coming for sure!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ELEMENT 7 END -->
+            <!-- ELEMENT 8: Delhi -->
+            <div class="jumbotron  hidden" id="p_8">
+              <p id="weather_in_8" class="city" style="font-size:25px">Element 6</p>
+              <div class="row">
+                <div class="col-xs-7">
+                  <div>
+                    <img src="weather/08.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <div>
+                    <p id="date_8" class="date" style="font-size:14px">Today, Nov 13</p>
+                    <p style="font-size:14px">
+                      <span style="font-size:50px">33</span>°C
+                      <br>no sun, no clouds, just smog, no wind</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>Tomorrow</p>
+                </div>
+                <div class="col-xs-6">
+                  <p>Trend</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/08.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">34°C
+                      <br>same as today, try not to breathe!</p>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <img src="weather/08.png" class="img-responsive">
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div>
+                    <p style="font-size:14px">how knows...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ELEMENT 8 END -->
           </div>
           <div class="col-md-5">
             <br>
@@ -285,114 +560,142 @@
               </li>
             </ul>
             <div class="tab-content">
-			<br>
-			<div class="tab-pane" id="share_buttons">
-			<!-- http://js-socials.com -->    
-			<script>
-              initOrUpdateShareButtons();
-			</script>
-			</div>
+              <br>
+              <div class="tab-pane" id="share_buttons">
+                <!-- http://js-socials.com -->
+                <script>
+                  initOrUpdateShareButtons();
+                </script>
+              </div>
               <div class="tab-pane" id="make">
-                <p>
-                  <br>Want to go for BBQ, skiing, swimming?
-                  <br>Motivate your friends with great weather!
-                  <br>Don't like meeting your friends?
-                  <br>Excuse yourself with bad weather!&nbsp;
-                  <br>
-                  <br>It's never been so easy to make weather great again!</p>
+                <p>Pissed by bad weather?
+                  <br>Want to go for BBQ, swimming or even skiing?
+                  <br>It is easy to change the weather. Select below and try it!</p>
                 <form class="form" id="Form" onsubmit="return false;">
                   <div class="form-group">
                     <p>Where:
                       <input class="form-control" id="Where" type="text" value="Munich">
-                    </p>Make weather:
+                    </p>Make weather
                     <div class="radio">
                       <label>
                         <input type="radio" name="weather" value="1" checked="checked">great again</label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="weather" value="2">shitty</label>
+                        <input type="radio" name="weather" value="2">cold and rainy</label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" value="3" name="weather">burn more coal!</label>
+                        <input type="radio" value="3" name="weather">ready for skiing</label>
                     </div>
-                    <a class="btn btn-primary" id="link" href="?w=1&city=Munich" name="link">Create your own weather!</a>
-                  </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" value="4" name="weather">Christmassy</label>
+                    </div>
+                    <div id="showmore">
+                      <a class="btn btn-link" href="#showmore" onclick="document.getElementById('more').classList.toggle('hidden');document.getElementById('showmore').classList.add('hidden');">show more...</a>
+                    </div>
+                    <div id="more" class="hidden">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" value="7" name="weather">Chennai like</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" value="8" name="weather">Dehli like</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" value="5" name="weather">Apocalypse!</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" value="6" name="weather">I don't give a shit - my office doesn't even have a window!</label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" value="0" name="weather">I think this website is a hoax.</label>
+                      </div>
+                    </div>
+                    <!--<div class="radio">
+                        <label>
+                          <input type="radio" value="" name="weather">Can you please make a solar eclipse?</label>
+                      </div>--></div>
+                  <a class="btn btn-primary" id="link" href="?w=1&amp;city=Munich" name="link">Create your own weather!</a>
                 </form>
               </div>
-              <div id="about" class="tab-pane">
-                <p>
-                  <br>We make weather great again.
-                  <br>We believe it shouldn't be difficult to change the weather.
-                  <br>With our solution
-                  <b>even you</b>&nbsp;can change the weather with just a few clicks.
-                  <br>We fight global warming!</p>
-                <p>
-                  <b>Address:</b>
-                  <br>1600 Pennsylvania Ave NW
-                  <br>Washington DC 20500, USA
-                  <br>Phone: +1 202-456-111</p>
-		
-		   
-		<p>
-		  <a href="https://github.com/gogannes/makeweathergreatagain">
-		    <img src="GitHub-Mark-32px.png" aria-hidden="true" alt="Github logo" width="16" height="16" />
-		    Support
-		  </a>
-		  <a href="https://www.browserstack.com">
-		    <img src="browserstack-logo.png" aria-hidden="true" alt="Browserstack logo" width="16" height="16" />
-		    Supported by BrowserStack
-		  </a>
-		</p>
-		      
-		      <p style="font-size: 10px"><br><br><br>Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
+            </div>
+            <div class="tab-pane" id="about">
+              <p>We make weather great again.
+                <br>We believe it shouldn't be difficult to change the weather.
+                <br>With our solution
+                <b>even you</b>&nbsp;can change the weather with just a few clicks.
+                <br>
+                <br>Yes We Can! Make Weather Great Again!</p>
+              <p>
+                <b>Address:</b>,
+                <br>725 5th Ave, Trump Tower,
+                <br>New York, NY 10022, USA</p>
+              <p>
+                <a href="https://github.com/gogannes/makeweathergreatagain">
 
-              </div>
+		    <img src="GitHub-Mark-32px.png" aria-hidden="true" alt="Github logo" width="16" height="16">
+
+		    Support
+
+		  </a>
+          <a href="https://www.browserstack.com">
+            <img src="browserstack-logo.png" aria-hidden="true" alt="Browserstack logo" width="16" height="16" />
+            Supported by BrowserStack
+          </a>
+              </p>
+              <p style="font-size: 10px">
+                <br>
+                <br>
+                <br>Impressum: Schreiber, Gaisbergstraße 10, 81675 Munich, info[at]makeweathergreatagain.com</p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
     <script type="text/javascript">
       //////////////////////////////////////////////////
-      // code to be executed after page is loaded
+              // code to be executed after page is loaded
 
-      var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
-      document.querySelectorAll('.date').forEach(function (element) {
-        element.innerHTML = "Today, " + d;
-      });
+              var d = (new Date()).toString().split(' ').splice(1, 2).join(' ');
+              document.querySelectorAll('.date').forEach(function (element) {
+                element.innerHTML = "Today, " + d;
+              });
 
-      try {
-        var query = window.location.search;
-        console.log('query: ' + query);
-        if (query) {
-          var splittedQuery = query.split('&', 2);
-	  var weather_query = splittedQuery[0];
-	  var city_query = splittedQuery[1];
-          var weather = weather_query.substring(3);
-          var city = city_query.substring(5);
-          var state = {w: weather, city: city};
-          presentState(state);
-          document.getElementById('link').setAttribute('href', createLink(state));
-          document.getElementById("Where").value = city;
-          document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
-          document.getElementById("li1").classList.add("active");
-          document.getElementById("share_buttons").classList.add("active", "fade", "in");
-        } else {
-          //show directly tab "make weather great again"
-          document.getElementById("li2").classList.add("active");
-          document.getElementById("make").classList.add("active", "fade", "in");
-        }
-      } finally {
-        // add event listeners to input fields:
-        document.querySelectorAll('input[name="weather"]').forEach(function (el) {
-          el.onchange = update_all;
-        });
-        document.getElementById("Where").oninput = update_all;
-      }
-
+              try {
+                var query = window.location.search;
+                console.log('query: ' + query);
+                if (query) {
+                  var splittedQuery = query.split('&', 2);
+        	  var weather_query = splittedQuery[0];
+        	  var city_query = splittedQuery[1];
+                  var weather = weather_query.substring(3);
+                  var city = city_query.substring(5);
+                  var state = {w: weather, city: city};
+                  presentState(state);
+                  document.getElementById('link').setAttribute('href', createLink(state));
+                  document.getElementById("Where").value = city;
+                  document.querySelector('input[name="weather"][value="' + weather + '"]').checked = "checked";
+                  document.getElementById("li1").classList.add("active");
+                  document.getElementById("share_buttons").classList.add("active", "fade", "in");
+                } else {
+                  //show directly tab "make weather great again"
+                  document.getElementById("li2").classList.add("active");
+                  document.getElementById("make").classList.add("active", "fade", "in");
+                }
+              } finally {
+                // add event listeners to input fields:
+                document.querySelectorAll('input[name="weather"]').forEach(function (el) {
+                  el.onchange = update_all;
+                });
+                document.getElementById("Where").oninput = update_all;
+              }
     </script>
+
+
 </body></html>
