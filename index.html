@@ -75,10 +75,23 @@
         ga('send', 'pageview');
     </script>
 	    <script>
+
+
+
       $(document).ready(function() {
-	  var mydelay=7000;
-		$(".contenttoarrive").delay(mydelay).slideDown( 500 ); 
-		$(".contenttoarrive_title").delay(mydelay+500).fadeIn(500);       
+		var mydelay=7000;
+		$(".contenttoarrive").delay(mydelay).slideDown(500, function() {
+    $('html, body').delay('200').animate({
+    scrollTop: $(this).offset().top - 111
+    }, 200);
+}); 
+		
+		
+
+		$(".contenttoarrive_title").delay(mydelay+500).fadeIn(500);   
+		
+	//	window.scrollTo(0, 0);
+	
             });	  
     </script>
 	
@@ -574,7 +587,7 @@
                 </div>
                 <div class="col-xs-3">
                   <div>
-                    <p style="font-size:14px">how knows...</p>
+                    <p style="font-size:14px">who knows...</p>
                   </div>
                 </div>
               </div>
