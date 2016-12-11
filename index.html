@@ -74,6 +74,13 @@
         ga('create', 'UA-87680784-1', 'auto');
         ga('send', 'pageview');
     </script>
+	    <script>
+      $(document).ready(function() {
+		$(".contenttoarrive_title").delay(3500).fadeIn(500);
+		$(".contenttoarrive").delay(3000).fadeIn(500);        
+            });
+    </script>
+	
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <style>
@@ -81,6 +88,18 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+		
+		#element2 {
+			position: relative;
+			left: -15px;
+			top:00px;
+		}
+		#element3 {
+			background: none;
+			position: absolute;
+			left: 130px;
+			top:40px;        
+		}
     </style>
     <title>MakeWeatherGreatAgain.com</title>
     <!-- http://realfavicongenerator.net/
@@ -103,6 +122,16 @@
                 <a href="http://MakeWeatherGreatAgain.com" style="text-decoration: none; color:black">MakeWeatherGreatAgain.com</a>
               </p>
             </div>
+			
+			<div class="contenttoarrive" id="element2" style="display:none;  z-index:-2; height:120px">
+              <p>
+                <img class=".img-responsive" src="pics/trump.png " style="width:180px ;">
+              </p>
+            </div>
+            <div id="element3" class="contenttoarrive_title" style="display:none;  z-index:-1;">
+              <img src="pics/bubble3.png " style="display:show; width:150px; ">
+            </div>
+			
             <!-- ELEMENT 0 -->
             <div class="jumbotron" id="p_0">
               <!-- <p id="weather_in_0" class="city" style="font-size:25px">Make Weather Great Again!</p>-->
