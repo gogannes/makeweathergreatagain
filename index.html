@@ -76,9 +76,10 @@
     </script>
 	    <script>
       $(document).ready(function() {
-		$(".contenttoarrive_title").delay(5500).fadeIn(500);
-		$(".contenttoarrive").delay(5000).fadeIn(500);        
-            });
+	  var mydelay=7000;
+		$(".contenttoarrive").delay(mydelay).slideDown( 500 ); 
+		$(".contenttoarrive_title").delay(mydelay+500).fadeIn(500);       
+            });	  
     </script>
 	
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
