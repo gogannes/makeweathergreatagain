@@ -75,6 +75,8 @@
         ga('create', 'UA-87680784-1', 'auto');
         ga('send', 'pageview');
     </script>
+	
+	<script src="https://cdn.jsdelivr.net/howler.js/2.0.2/howler.min.js"></script>
 	    <script>
 
 
@@ -96,24 +98,21 @@
             });	  
 			
 	
-
-
-	
-	//var audio = new Audio('sax.mp3');
-	//setTimeout("audio.play()",7000);
-    </script>
-
-  <script src="https://cdn.jsdelivr.net/howler.js/2.0.2/howler.min.js"></script>
-  
-	<script>
-    var sound = new Howl({
+var sound = new Howl({
       src: ['http://makeweathergreatagain.com/sax.mp3'],
-	autoplay: true,
-	
 	onend: function() {
 		console.log('Sound played!');
 	}
     });
+
+	//var audio = new Audio('sax.mp3');
+	setTimeout("sound.play()",7000);
+    </script>
+
+  
+  
+	<script>
+    
 	</script>
 	
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
