@@ -725,7 +725,7 @@
                 var weather_query = splittedQuery[0];
 				console.log(weather_query);
                 var city_query = splittedQuery[1];
-				var start=city_query.search('city=')
+				var start=city_query.search('city=');
                 console.log(city_query);
 				var weather = weather_query.substring(3);
                 var city = city_query.substring(5+start);
