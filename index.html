@@ -95,11 +95,25 @@
 	
             });	  
 			
-			
-	var audio = new Audio('sax.mp3');
-	setTimeout("audio.play()",7000);
+	
+
+
+	
+	//var audio = new Audio('sax.mp3');
+	//setTimeout("audio.play()",7000);
     </script>
+
+  <script src="https://cdn.jsdelivr.net/howler.js/2.0.2/howler.min.js"></script>
+  
 	<script>
+    var sound = new Howl({
+      src: ['http://makeweathergreatagain.com/sax.mp3'],
+	autoplay: true,
+	
+	onend: function() {
+		console.log('Sound played!');
+	}
+    });
 	</script>
 	
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
