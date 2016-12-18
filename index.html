@@ -36,7 +36,7 @@
         }
 
         function initOrUpdateShareButtons() {
-                $("#share_buttons").jsSocials({
+                $("#share_buttons_buttons").jsSocials({
                     text: "Make Weather Great Again",
                     showLabel: true,
                     showCount: false,
@@ -617,10 +617,12 @@
             <div class="tab-content">
               <br>
               <div class="tab-pane" id="share_buttons">
-                <!-- http://js-socials.com -->
-                <script>
+				<div>
+				<p>Do you like today's weather?<br>Share it with your friends or <a href="#li2" onclick="$('#makebutton').click();">create</a> your own personal weather page with just two clicks!</p>
+				</div><!-- http://js-socials.com -->
+                <div id="share_buttons_buttons"><script>
                   initOrUpdateShareButtons();
-                </script>
+                </script></div>
               </div>
               <div class="tab-pane" id="make">
                 <p>Want to go for BBQ, swimming or even skiing?
